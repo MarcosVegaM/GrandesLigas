@@ -1,0 +1,77 @@
+﻿@model IEnumerable<GrandesLigas.Models.Liga>
+
+<h2 class="text-center my-4">Lista de Ligas</h2>
+
+<!-- TOAST DE ÉXITO -->
+@if (TempData["SuccessMessage"] != null)
+{
+    <div id="successToast" class="toast position-fixed bottom-0 end-0 p-3" style="z-index: 1050;" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header bg-success text-white">
+            <strong class="me-auto">Éxito</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Cerrar"></button>
+        </div>
+        <div class="toast-body">
+            @TempData["SuccessMessage"]
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var successToast = new bootstrap.Toast(document.getElementById('successToast'), { delay: 3000 });
+            successToast.show();
+        });
+    </script>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div id="errorToast" class="toast position-fixed bottom-0 end-0 p-3" style="z-index: 1050;" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header bg-danger text-white">
+            <strong class="me-auto">Error</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Cerrar"></button>
+        </div>
+        <div class="toast-body">
+            @TempData["ErrorMessage"]
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var errorToast = new bootstrap.Toast(document.getElementById('errorToast'), { delay: 3000 });
+            errorToast.show();
+        });
+    </script>
+}
+
+<div class="text-center mb-4">
+    <button onclick="window.location.href='@Url.Action("Crear")'" class="btn btn-primary btn-lg">
+        Crear Nueva Liga
+    </button>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-striped table-hover">
+        <thead class="table-primary">
+            <tr>
+                <th>Nombre</th>
+                <th>Temporada</th>
+                <th>Descripción</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var liga in Model)
+            {
+                <tr>
+                    <td>@liga.Nombre</td>
+                    <td>@liga.Temporada</td>
+                    <td>@liga.Descripcion</td>
+                    <td>
+                        <a href="@Url.Action("Editar", new { id = liga.Id })" class="btn btn-warning btn-sm">Editar</a>
+                        <a href="@Url.Action("Eliminar", new { id = liga.Id })" class="btn btn-danger btn-sm">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

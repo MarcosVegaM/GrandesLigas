@@ -1,0 +1,60 @@
+﻿@model GrandesLigas.Models.Usuario
+
+<h2 class="text-center my-4">Crear Usuario</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-lg">
+                    <div class="card-header text-center bg-primary text-white">
+                        <h4>Detalles del Usuario</h4>
+                    </div>
+                    <div class="card-body">
+                        <!-- Nombre -->
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Nombre, new { @class = "form-label" })
+                            @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", placeholder = "Ingrese el nombre completo" })
+                            @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                        </div>
+
+                        <!-- Email -->
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Email, new { @class = "form-label" })
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Ingrese el correo electrónico" })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+
+                        <!-- Contraseña -->
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Contraseña, new { @class = "form-label" })
+                            @Html.PasswordFor(model => model.Contraseña, new { @class = "form-control", placeholder = "Ingrese una contraseña" })
+                            @Html.ValidationMessageFor(model => model.Contraseña, "", new { @class = "text-danger" })
+                        </div>
+
+                        <!-- Tipo de Usuario -->
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Tipo, new { @class = "form-label" })
+                            @Html.DropDownListFor(model => model.Tipo, new List<SelectListItem>
+                        {
+                        new SelectListItem { Value = "1", Text = "Administrador" },
+                        new SelectListItem { Value = "2", Text = "Entrenador" },
+                        new SelectListItem { Value = "3", Text = "Jugador" }
+                        }, "Seleccione un tipo", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Tipo, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group text-center mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg">Crear</button>
+                            <a href="@Url.Action("Index", "Usuario")" class="btn btn-secondary btn-lg ml-3">Cancelar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

@@ -1,0 +1,31 @@
+﻿@model GrandesLigas.Models.RestablecerContraseñaModel
+
+@{
+    ViewData["Title"] = "Restablecer Contraseña";
+}
+
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="card shadow-lg p-4 rounded" style="max-width: 400px; width: 100%;">
+        <div class="card-body">
+            <h2 class="text-center fw-bold mb-4 text-primary">Restablecer Contraseña</h2>
+
+            <p class="text-muted text-center">Ingresa tu correo electrónico y te enviaremos instrucciones para restablecer tu contraseña.</p>
+
+            <form asp-action="RestablecerContraseña" method="post">
+                <div class="mb-3">
+                    <label asp-for="Email" class="form-label fw-bold"></label>
+                    <input asp-for="Email" class="form-control rounded" placeholder="ejemplo@correo.com" />
+                    <span asp-validation-for="Email" class="text-danger small"></span>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary fw-bold">Enviar</button>
+                </div>
+            </form>
+
+            <div class="text-center mt-3">
+                <a asp-action="Login" class="text-decoration-none text-secondary">Volver al inicio de sesión</a>
+            </div>
+        </div>
+    </div>
+</div>

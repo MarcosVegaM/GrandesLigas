@@ -1,0 +1,6 @@
+C:\Users\MVega\source\repos\GestorFinanzasGit\gestorfinanzas\GestorFinanzasAPI\obj\Release\net8.0\GestorFinanzasAPI.csproj.AssemblyReference.cache
+C:\Users\MVega\source\repos\GestorFinanzasGit\gestorfinanzas\GestorFinanzasAPI\obj\Release\net8.0\GestorFinanzasAPI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\MVega\source\repos\GestorFinanzasGit\gestorfinanzas\GestorFinanzasAPI\obj\Release\net8.0\GestorFinanzasAPI.AssemblyInfoInputs.cache
+C:\Users\MVega\source\repos\GestorFinanzasGit\gestorfinanzas\GestorFinanzasAPI\obj\Release\net8.0\GestorFinanzasAPI.AssemblyInfo.cs
+C:\Users\MVega\source\repos\GestorFinanzasGit\gestorfinanzas\GestorFinanzasAPI\obj\Release\net8.0\GestorFinanzasAPI.csproj.CoreCompileInputs.cache
+C:\Users\MVega\source\repos\GestorFinanzasGit\gestorfinanzas\GestorFinanzasAPI\obj\Release\net8.0\GestorFinanzasAPI.MvcApplicationPartsAssemblyInfo.cache

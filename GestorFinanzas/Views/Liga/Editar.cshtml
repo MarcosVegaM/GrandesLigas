@@ -1,0 +1,45 @@
+﻿@model GrandesLigas.Models.Liga
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white text-center">
+                    <h4>Editar Liga</h4>
+                </div>
+                <div class="card-body">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        @Html.HiddenFor(model => model.Id)
+
+                        <div class="form-group mb-3">
+                            @Html.LabelFor(model => model.Nombre)
+                            @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", placeholder = "Ingrese el nombre de la liga" })
+                            @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group mb-3">
+                            @Html.LabelFor(model => model.Temporada)
+                            @Html.TextBoxFor(model => model.Temporada, new { @class = "form-control", placeholder = "Ingrese la temporada" })
+                            @Html.ValidationMessageFor(model => model.Temporada, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group mb-4">
+                            @Html.LabelFor(model => model.Descripcion)
+                            @Html.TextAreaFor(model => model.Descripcion, new { @class = "form-control", placeholder = "Ingrese una descripción", rows = "4" })
+                            @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="btn btn-primary me-2">Guardar</button>
+                            <a href="@Url.Action("Index", "Liga")" class="btn btn-secondary">Cancelar</a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,193 @@
+﻿@{
+    ViewData["Title"] = "Inicio - Grandes Ligas de Béisbol";
+}
+
+<!-- TOAST DE ÉXITO -->
+@if (TempData["SuccessMessage"] != null)
+{
+    <div id="successToast" class="toast position-fixed bottom-0 end-0 p-3" style="z-index: 1050;" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header bg-success text-white">
+            <strong class="me-auto">Éxito</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Cerrar"></button>
+        </div>
+        <div class="toast-body">
+            @TempData["SuccessMessage"]
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var successToast = new bootstrap.Toast(document.getElementById('successToast'), { delay: 3000 });
+            successToast.show();
+        });
+    </script>
+}
+<!-- TOAST DE ERROR -->
+@if (TempData["ErrorMessage"] != null)
+{
+    <div id="errorToast" class="toast position-fixed bottom-0 end-0 p-3" style="z-index: 1050;" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header bg-danger text-white">
+            <strong class="me-auto">Error</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Cerrar"></button>
+        </div>
+        <div class="toast-body">
+            @TempData["ErrorMessage"]
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var errorToast = new bootstrap.Toast(document.getElementById('errorToast'), { delay: 3000 });
+            errorToast.show();
+        });
+    </script>
+}
+
+<!-- Hero Section con temática de béisbol -->
+<div class="hero-baseball text-center text-white d-flex align-items-center justify-content-center"
+     style="height: 40vh; background: linear-gradient(rgba(0, 45, 90, 0.8), rgba(0, 45, 90, 0.8)), url('/images/baseball-stadium.jpg') center/cover no-repeat;">
+    <div>
+        <h1 class="display-3 fw-bold">Grandes Ligas de Béisbol</h1>
+        <p class="lead">El sistema de gestión más completo para equipos profesionales</p>
+        <div class="mt-4">
+            <a href="@Url.Action("Index", "Equipos")" class="btn btn-primary btn-lg mx-2">Ver Equipos</a>
+            <a href="@Url.Action("Index", "Jugadores")" class="btn btn-outline-light btn-lg mx-2">Ver Jugadores</a>
+        </div>
+    </div>
+</div>
+
+<!-- Estadísticas destacadas -->
+<div class="container-fluid bg-light py-4">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-3">
+                <div class="counter-box">
+                    <h2 class="fw-bold text-primary">30</h2>
+                    <p class="text-muted">Equipos Registrados</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="counter-box">
+                    <h2 class="fw-bold text-primary">750+</h2>
+                    <p class="text-muted">Jugadores Activos</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="counter-box">
+                    <h2 class="fw-bold text-primary">162</h2>
+                    <p class="text-muted">Juegos por Temporada</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="counter-box">
+                    <h2 class="fw-bold text-primary">100+</h2>
+                    <p class="text-muted">Años de Historia</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Contenido principal -->
+<div class="container my-5">
+    <div class="row">
+        <!-- Sección de información -->
+        <div class="col-md-6">
+            <h2 class="fw-bold text-primary">Bienvenido al Sistema</h2>
+            <p class="lead">La plataforma oficial de gestión para las Grandes Ligas de Béisbol</p>
+
+            <div class="feature-box mt-4 p-4 border rounded">
+                <h3 class="fw-bold"><i class="fas fa-users me-2 text-primary"></i> Gestión de Equipos</h3>
+                <p>Administra toda la información de tus equipos favoritos, jugadores, estadísticas y calendario de juegos.</p>
+            </div>
+
+            <div class="feature-box mt-3 p-4 border rounded">
+                <h3 class="fw-bold"><i class="fas fa-chart-line me-2 text-primary"></i> Estadísticas Avanzadas</h3>
+                <p>Accede a análisis detallados y métricas avanzadas para cada jugador y equipo.</p>
+            </div>
+
+            <div class="feature-box mt-3 p-4 border rounded">
+                <h3 class="fw-bold"><i class="fas fa-calendar-alt me-2 text-primary"></i> Calendario Completo</h3>
+                <p>Consulta el calendario completo de la temporada con resultados en tiempo real.</p>
+            </div>
+        </div>
+
+        <!-- Carrusel de imágenes -->
+        <div class="col-md-6">
+            <div id="baseballCarousel" class="carousel slide shadow-lg rounded" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#baseballCarousel" data-bs-slide-to="0" class="active"></button>
+                    <button type="button" data-bs-target="#baseballCarousel" data-bs-slide-to="1"></button>
+                    <button type="button" data-bs-target="#baseballCarousel" data-bs-slide-to="2"></button>
+                </div>
+                <div class="carousel-inner rounded">
+                    <div class="carousel-item active">
+                        <img src="/images/baseball-action.jpg" class="d-block w-100" alt="Jugada de béisbol">
+                        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
+                            <h5>Emoción en cada juego</h5>
+                            <p>Vive la intensidad de las Grandes Ligas</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="/images/baseball-stadium-night.jpg" class="d-block w-100" alt="Estadio de noche">
+                        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
+                            <h5>Estadios icónicos</h5>
+                            <p>Los templos del béisbol profesional</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="/images/baseball-trophy.jpg" class="d-block w-100" alt="Trofeo de béisbol">
+                        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
+                            <h5>La gloria del campeón</h5>
+                            <p>Persigue el sueño de las Series Mundiales</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#baseballCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#baseballCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                </button>
+            </div>
+
+            <!-- Noticias destacadas -->
+            <div class="mt-4 p-3 bg-primary text-white rounded">
+                <h4 class="fw-bold"><i class="fas fa-newspaper me-2"></i>Últimas Noticias</h4>
+                <ul class="list-group list-group-flush mt-2">
+                    <li class="list-group-item bg-transparent text-white border-light">Nuevo récord de home runs en la temporada</li>
+                    <li class="list-group-item bg-transparent text-white border-light">Jugador del mes: Miguel Rodríguez</li>
+                    <li class="list-group-item bg-transparent text-white border-light">Próximo clásico: Yankees vs Red Sox</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .hero-baseball {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .counter-box {
+        padding: 20px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .feature-box {
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+        .feature-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+    .carousel-item img {
+        height: 400px;
+        object-fit: cover;
+    }
+</style>
+

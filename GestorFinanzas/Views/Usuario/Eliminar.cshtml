@@ -1,0 +1,27 @@
+﻿@model GrandesLigas.Models.Usuario
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-danger text-white text-center">
+                    <h4>Eliminar Usuario</h4>
+                </div>
+                <div class="card-body">
+                    <p class="text-center">¿Estás seguro de que deseas eliminar a <strong>@Model.Nombre</strong>?</p>
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="btn btn-danger mr-2">Eliminar</button>
+                            <a href="@Url.Action("Index")" class="btn btn-secondary">Cancelar</a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35806.99
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrandesLigas", "GestorFinanzas\GrandesLigas.csproj", "{8E6DEC20-1D1A-45A3-80A6-D5DB29813C23}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrandesLigasAPI", "GestorFinanzasAPI\GrandesLigasAPI.csproj", "{14D618A3-21B4-41CD-9548-AF9276415FD7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8E6DEC20-1D1A-45A3-80A6-D5DB29813C23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E6DEC20-1D1A-45A3-80A6-D5DB29813C23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E6DEC20-1D1A-45A3-80A6-D5DB29813C23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E6DEC20-1D1A-45A3-80A6-D5DB29813C23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14D618A3-21B4-41CD-9548-AF9276415FD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14D618A3-21B4-41CD-9548-AF9276415FD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14D618A3-21B4-41CD-9548-AF9276415FD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14D618A3-21B4-41CD-9548-AF9276415FD7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ABBE5C72-E631-448C-8582-1B3433F0E298}
+	EndGlobalSection
+EndGlobal

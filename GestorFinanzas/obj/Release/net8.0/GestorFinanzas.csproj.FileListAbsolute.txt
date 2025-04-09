@@ -1,0 +1,8 @@
+C:\Users\MVega\source\repos\GestorFinanzasGit\gestorfinanzas\GestorFinanzas\obj\Release\net8.0\GestorFinanzas.csproj.AssemblyReference.cache
+C:\Users\MVega\source\repos\GestorFinanzasGit\gestorfinanzas\GestorFinanzas\obj\Release\net8.0\GestorFinanzas.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\MVega\source\repos\GestorFinanzasGit\gestorfinanzas\GestorFinanzas\obj\Release\net8.0\GestorFinanzas.AssemblyInfoInputs.cache
+C:\Users\MVega\source\repos\GestorFinanzasGit\gestorfinanzas\GestorFinanzas\obj\Release\net8.0\GestorFinanzas.AssemblyInfo.cs
+C:\Users\MVega\source\repos\GestorFinanzasGit\gestorfinanzas\GestorFinanzas\obj\Release\net8.0\GestorFinanzas.csproj.CoreCompileInputs.cache
+C:\Users\MVega\source\repos\GestorFinanzasGit\gestorfinanzas\GestorFinanzas\obj\Release\net8.0\GestorFinanzas.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\MVega\source\repos\GestorFinanzasGit\gestorfinanzas\GestorFinanzas\obj\Release\net8.0\GestorFinanzas.RazorAssemblyInfo.cache
+C:\Users\MVega\source\repos\GestorFinanzasGit\gestorfinanzas\GestorFinanzas\obj\Release\net8.0\GestorFinanzas.RazorAssemblyInfo.cs

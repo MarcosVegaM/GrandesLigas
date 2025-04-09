@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Confirmar Restablecimiento de Contraseña";
+}
+
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="card shadow-lg p-4" style="max-width: 400px; width: 100%;">
+        <div class="card-body text-center">
+            <h2 class="fw-bold mb-4 text-primary">Restablecer Contraseña</h2>
+
+            <form asp-action="ConfirmarRestablecimiento" method="post">
+                <input type="hidden" name="token" value="@ViewBag.Token" />
+
+                <div class="mb-3">
+                    <label for="nuevaContraseña" class="form-label">Nueva Contraseña</label>
+                    <input type="password" name="nuevaContraseña" class="form-control" required />
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 fw-bold">Restablecer Contraseña</button>
+            </form>
+        </div>
+    </div>
+</div>
+

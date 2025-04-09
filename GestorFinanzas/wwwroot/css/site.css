@@ -1,0 +1,36 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+.navbar {
+    background-color: #002D62 !important; /* Azul oscuro de las Grandes Ligas */
+}
+
+.text-dark {
+    --bs-text-opacity: 1;
+    color: white !important;
+}
+.img-custom {
+    width: 600px; /* Ancho fijo */
+    height: 500px; /* Alto fijo */
+    object-fit: cover; /* Recorta la imagen para ajustarse sin deformarse */
+    border-radius: 10px; /* Opcional: Bordes redondeados */
+}

@@ -1,0 +1,30 @@
+﻿@model GrandesLigas.Models.Liga
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-danger text-white text-center">
+                    <h4>Eliminar Liga</h4>
+                </div>
+                <div class="card-body">
+                    <p class="text-center">
+                        ¿Estás seguro de que deseas eliminar la liga <strong>@Model.Nombre</strong> correspondiente a la temporada <strong>@Model.Temporada</strong>?
+                    </p>
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.Id)
+
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="btn btn-danger me-2">Eliminar</button>
+                            <a href="@Url.Action("Index", "Liga")" class="btn btn-secondary">Cancelar</a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
