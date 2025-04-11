@@ -28,13 +28,13 @@
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\GrandesLigas.os56usnp9g.bundle.scp.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-2OAWr2cE/IdO4I8W\u002B2d3QA9kw5Qihn2BeMynpVqovcQ="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1130"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u00222OAWr2cE/IdO4I8W\u002B2d3QA9kw5Qihn2BeMynpVqovcQ=\u0022"},{"Name":"Last-Modified","Value":"Fri, 11 Apr 2025 22:40:46 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1130"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u00222OAWr2cE/IdO4I8W\u002B2d3QA9kw5Qihn2BeMynpVqovcQ=\u0022"},{"Name":"Last-Modified","Value":"Fri, 11 Apr 2025 23:05:57 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/GrandesLigas/GrandesLigas.os56usnp9g.bundle.scp.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\GrandesLigas.os56usnp9g.bundle.scp.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"os56usnp9g"},{"Name":"integrity","Value":"sha256-2OAWr2cE/IdO4I8W\u002B2d3QA9kw5Qihn2BeMynpVqovcQ="},{"Name":"label","Value":"_content/GrandesLigas/GrandesLigas.bundle.scp.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1130"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u00222OAWr2cE/IdO4I8W\u002B2d3QA9kw5Qihn2BeMynpVqovcQ=\u0022"},{"Name":"Last-Modified","Value":"Fri, 11 Apr 2025 22:40:46 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1130"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u00222OAWr2cE/IdO4I8W\u002B2d3QA9kw5Qihn2BeMynpVqovcQ=\u0022"},{"Name":"Last-Modified","Value":"Fri, 11 Apr 2025 23:05:57 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/GrandesLigas/images/baseball-action.jpg">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\baseball-action.jpg'))</AssetFile>

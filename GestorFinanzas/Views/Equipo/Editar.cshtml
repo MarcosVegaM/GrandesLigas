@@ -1,0 +1,238 @@
+﻿@model GrandesLigasAPI.Models.Equipo
+
+@{
+    ViewData["Title"] = "Editar Equipo";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white text-center">
+                    <h4><i class="fas fa-edit me-2"></i>Editar Equipo</h4>
+                </div>
+                <div class="card-body">
+                    @using (Html.BeginForm("Editar", "Equipo", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.EquipoId)
+
+                        <div class="row">
+                            <!-- Columna Izquierda -->
+                            <div class="col-md-6">
+                                <!-- Nombre -->
+                                <div class="form-group mb-3">
+                                    @Html.LabelFor(model => model.Nombre, new { @class = "form-label fw-bold" })
+                                    @Html.TextBoxFor(model => model.Nombre,
+                                             new
+                                             {
+                                                 @class = "form-control",
+                                                 placeholder = "Nombre del equipo",
+                                                 required = "required"
+                                             })
+                                    @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                                </div>
+
+                                <!-- Ciudad -->
+                                <div class="form-group mb-3">
+                                    @Html.LabelFor(model => model.Ciudad, new { @class = "form-label fw-bold" })
+                                    @Html.TextBoxFor(model => model.Ciudad,
+                                             new
+                                             {
+                                                 @class = "form-control",
+                                                 placeholder = "Ciudad del equipo",
+                                                 required = "required"
+                                             })
+                                    @Html.ValidationMessageFor(model => model.Ciudad, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <!-- Columna Derecha -->
+                            <div class="col-md-6">
+                                <!-- Liga -->
+                                <div class="form-group mb-3">
+                                    @Html.LabelFor(model => model.LigaId, "Liga", new { @class = "form-label fw-bold" })
+                                    @Html.DropDownListFor(model => model.LigaId,
+                                             ViewData["Ligas"] as List<SelectListItem>,
+                                             "Seleccione una liga",
+                                             new { @class = "form-select", required = "required" })
+                                    @Html.ValidationMessageFor(model => model.LigaId, "", new { @class = "text-danger" })
+                                </div>
+
+                                <!-- Logo -->
+                                <div class="form-group mb-3">
+                                    @Html.LabelFor(model => model.Logo, new { @class = "form-label fw-bold" })
+                                    <div class="input-group">
+                                        <input type="file" class="form-control" id="LogoInput" name="LogoFile" accept="image/*" />
+                                        @if (Model.Logo != null && Model.Logo.Length > 0)
+                                        {
+                                            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#logoModal">
+                                                <i class="fas fa-eye me-1"></i>Ver Actual
+                                            </button>
+                                        }
+                                    </div>
+                                    @Html.HiddenFor(model => model.Logo)
+                                    <small class="text-muted">Suba nuevo logo (JPEG/PNG, máx. 5MB)</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Foto del Estadio -->
+                        <div class="form-group mb-3">
+                            @Html.LabelFor(model => model.FotoEstadio, new { @class = "form-label fw-bold" })
+                            <div class="input-group">
+                                <input type="file" class="form-control" id="EstadioInput" name="EstadioFile" accept="image/*" />
+                                @if (Model.FotoEstadio != null && Model.FotoEstadio.Length > 0)
+                                {
+                                    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#estadioModal">
+                                        <i class="fas fa-eye me-1"></i>Ver Actual
+                                    </button>
+                                }
+                            </div>
+                            @Html.HiddenFor(model => model.FotoEstadio)
+                            <small class="text-muted">Suba nueva foto del estadio (JPEG/PNG, máx. 5MB)</small>
+                        </div>
+
+                        <div class="d-flex justify-content-center mt-4">
+                            <button type="submit" class="btn btn-primary me-3">
+                                <i class="fas fa-save me-2"></i>Guardar Cambios
+                            </button>
+                            <a href="@Url.Action("Index", "Equipo")" class="btn btn-outline-secondary">
+                                <i class="fas fa-times me-2"></i>Cancelar
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para ver logo actual -->
+@if (Model.Logo != null && Model.Logo.Length > 0)
+{
+    <div class="modal fade" id="logoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Logo Actual del Equipo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Logo)"
+                         class="img-fluid rounded" alt="Logo del equipo" style="max-height: 300px;">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" onclick="document.getElementById('Logo').value = ''; document.getElementById('LogoInput').value = ''; $('#logoModal').modal('hide');">
+                        <i class="fas fa-trash-alt me-1"></i>Eliminar Logo
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-1"></i>Cerrar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- Modal para ver foto del estadio actual -->
+@if (Model.FotoEstadio != null && Model.FotoEstadio.Length > 0)
+{
+    <div class="modal fade" id="estadioModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Foto Actual del Estadio</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.FotoEstadio)"
+                         class="img-fluid rounded" alt="Foto del estadio">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" onclick="document.getElementById('FotoEstadio').value = ''; document.getElementById('EstadioInput').value = ''; $('#estadioModal').modal('hide');">
+                        <i class="fas fa-trash-alt me-1"></i>Eliminar Foto
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-1"></i>Cerrar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Configuración para el logo
+            setupImageUpload('LogoInput', 'Logo');
+
+            // Configuración para la foto del estadio
+            setupImageUpload('EstadioInput', 'FotoEstadio');
+
+            function setupImageUpload(inputId, hiddenInputId) {
+                const input = document.getElementById(inputId);
+                const maxSize = 5 * 1024 * 1024; // 5MB
+
+                input.addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+
+                    if (file) {
+                        // Validar tamaño
+                        if (file.size > maxSize) {
+                            alert('El archivo es demasiado grande (máximo 5MB)');
+                            e.target.value = '';
+                            return;
+                        }
+
+                        // Validar tipo de archivo
+                        if (!file.type.match('image.*')) {
+                            alert('Por favor seleccione un archivo de imagen (JPEG/PNG)');
+                            e.target.value = '';
+                            return;
+                        }
+
+                        // Convertir a base64
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            const base64String = e.target.result.split(',')[1];
+                            document.getElementById(hiddenInputId).value = base64String;
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+            }
+        });
+    </script>
+}
+
+<style>
+    .card {
+        border-radius: 15px;
+        overflow: hidden;
+    }
+
+    .card-header {
+        border-radius: 0 !important;
+    }
+
+    .form-control, .form-select {
+        border-radius: 8px;
+        padding: 0.75rem 1rem;
+    }
+
+    .btn {
+        border-radius: 8px;
+        padding: 0.5rem 1.5rem;
+    }
+
+    .input-group-text {
+        border-radius: 8px 0 0 8px;
+    }
+
+    .modal-img {
+        max-height: 70vh;
+        width: auto;
+    }
+</style>
