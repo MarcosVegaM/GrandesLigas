@@ -1,0 +1,197 @@
+﻿@model IEnumerable<GrandesLigasAPI.Models.Equipo>
+
+@{
+    ViewData["Title"] = "Lista de Equipos";
+}
+
+<h2 class="text-center my-4"><i class="fas fa-shield-alt me-2"></i>Directorio de Equipos</h2>
+
+<!-- TOAST DE ÉXITO -->
+@if (TempData["SuccessMessage"] != null)
+{
+    <div id="successToast" class="toast position-fixed bottom-0 end-0 p-3" style="z-index: 1050;" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header bg-success text-white">
+            <strong class="me-auto">Éxito</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Cerrar"></button>
+        </div>
+        <div class="toast-body">
+            @TempData["SuccessMessage"]
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var successToast = new bootstrap.Toast(document.getElementById('successToast'), { delay: 3000 });
+            successToast.show();
+        });
+    </script>
+}
+
+<!-- TOAST DE ERROR -->
+@if (TempData["ErrorMessage"] != null)
+{
+    <div id="errorToast" class="toast position-fixed bottom-0 end-0 p-3" style="z-index: 1050;" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header bg-danger text-white">
+            <strong class="me-auto">Error</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Cerrar"></button>
+        </div>
+        <div class="toast-body">
+            @TempData["ErrorMessage"]
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var errorToast = new bootstrap.Toast(document.getElementById('errorToast'), { delay: 3000 });
+            errorToast.show();
+        });
+    </script>
+}
+
+<div class="text-center mb-4">
+    <a href="@Url.Action("Crear")" class="btn btn-primary btn-lg">
+        <i class="fas fa-plus-circle me-2"></i>Registrar Nuevo Equipo
+    </a>
+</div>
+
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    @foreach (var equipo in Model)
+    {
+        <div class="col">
+            <div class="card h-100 shadow-sm equipo-card">
+                <!-- Logo del Equipo -->
+                <div class="text-center pt-3">
+                    @if (equipo.Logo != null && equipo.Logo.Length > 0)
+                    {
+                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(equipo.Logo)"
+                             class="card-img-top rounded-circle logo-equipo" alt="Logo del equipo">
+                    }
+                    else
+                    {
+                        <div class="mx-auto bg-light rounded-circle d-flex align-items-center justify-content-center logo-placeholder">
+                            <i class="fas fa-shield-alt fa-3x text-secondary"></i>
+                        </div>
+                    }
+                </div>
+
+                <!-- Datos del Equipo -->
+                <div class="card-body text-center">
+                    <h3 class="card-title text-primary mb-2">@equipo.Nombre</h3>
+                    <p class="card-subtitle mb-3 text-muted">
+                        <i class="fas fa-map-marker-alt me-1"></i>@equipo.Ciudad
+                    </p>
+
+                    <!-- Foto del Estadio -->
+                    <div class="estadio-container mb-3">
+                        @if (equipo.FotoEstadio != null && equipo.FotoEstadio.Length > 0)
+                        {
+                            <img src="data:image/jpeg;base64,@Convert.ToBase64String(equipo.FotoEstadio)"
+                                 class="img-fluid rounded estadio-img" alt="Estadio del equipo">
+                        }
+                        else
+                        {
+                            <div class="bg-light rounded d-flex align-items-center justify-content-center estadio-placeholder">
+                                <i class="fas fa-stadium fa-2x text-secondary"></i>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <!-- Acciones -->
+                <div class="card-footer bg-transparent">
+                    <div class="d-flex justify-content-center gap-2">
+                        <a href="@Url.Action("Editar", new { id = equipo.EquipoId })"
+                           class="btn btn-warning btn-sm">
+                            <i class="fas fa-edit me-1"></i>Editar
+                        </a>
+                        <a href="@Url.Action("Eliminar", new { id = equipo.EquipoId })"
+                           class="btn btn-danger btn-sm">
+                            <i class="fas fa-trash-alt me-1"></i>Eliminar
+                        </a>
+                     </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<!-- Estilos personalizados -->
+<style>
+    .equipo-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-radius: 15px;
+        overflow: hidden;
+        border: none;
+        background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    }
+
+        .equipo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+    .logo-equipo {
+        width: 120px;
+        height: 120px;
+        object-fit: contain;
+        border: 3px solid #f8f9fa;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+    }
+
+    .logo-placeholder {
+        width: 120px;
+        height: 120px;
+        border: 2px dashed #dee2e6;
+    }
+
+    .estadio-container {
+        height: 120px;
+        overflow: hidden;
+        border-radius: 10px;
+        position: relative;
+        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .estadio-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s;
+    }
+
+    .estadio-placeholder {
+        width: 100%;
+        height: 100%;
+        border: 2px dashed #dee2e6;
+    }
+
+    .equipo-card:hover .estadio-img {
+        transform: scale(1.05);
+    }
+
+    .equipo-card:hover .logo-equipo {
+        transform: rotate(5deg) scale(1.1);
+    }
+
+    .card-title {
+        font-weight: 700;
+        font-size: 1.3rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .card-subtitle {
+        font-size: 0.95rem;
+    }
+
+    .card-footer {
+        padding: 1rem;
+        background-color: rgba(0, 0, 0, 0.03);
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.8rem;
+    }
+</style>

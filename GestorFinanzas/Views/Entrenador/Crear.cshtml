@@ -1,0 +1,90 @@
+﻿@model GrandesLigas.Models.Entrenador
+
+@{
+    ViewData["Title"] = "Crear Entrenador";
+}
+
+<h2 class="text-center my-4">Registrar Nuevo Entrenador</h2>
+
+@using (Html.BeginForm("Crear", "Entrenador", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-lg">
+                    <div class="card-header text-center bg-primary text-white">
+                        <h4><i class="fas fa-user-tie me-2"></i>Datos del Entrenador</h4>
+                    </div>
+                    <div class="card-body">
+                        <!-- Nombre del Entrenador -->
+                        <div class="form-group mb-3">
+                            @Html.LabelFor(model => model.Nombre, new { @class = "form-label fw-bold" })
+                            @Html.TextBoxFor(model => model.Nombre,
+                                     new
+                                     {
+                                         @class = "form-control",
+                                         placeholder = "Ingrese el nombre completo del entrenador",
+                                         required = "required"
+                                     })
+                            @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                        </div>
+
+                        <!-- Especialidad -->
+                        <div class="form-group mb-3">
+                            @Html.LabelFor(model => model.Especialidad, new { @class = "form-label fw-bold" })
+                            @Html.DropDownListFor(model => model.Especialidad,
+                                     new SelectList(new List<string> {
+                        "Pitcheo", "Bateo", "Infield", "Outfield",
+                        "Fuerza y Condición", "Estrategia", "Bullpen",
+                        "Primera Base", "Tercera Base", "Bench Coach"
+                        }),
+                                     "Seleccione una especialidad",
+                                     new { @class = "form-select" })
+                            @Html.ValidationMessageFor(model => model.Especialidad, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group text-center mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-save me-2"></i>Guardar Entrenador
+                            </button>
+                            <a href="@Url.Action("Index", "Entrenador")" class="btn btn-outline-secondary btn-lg ms-3">
+                                <i class="fas fa-times me-2"></i>Cancelar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+<style>
+    .card {
+        border-radius: 10px;
+    }
+
+    .card-header {
+        border-radius: 10px 10px 0 0 !important;
+    }
+
+    .form-control, .form-select {
+        border-radius: 5px;
+    }
+
+    .btn-lg {
+        padding: 0.5rem 1.5rem;
+        font-size: 1.1rem;
+    }
+
+    .fa-user-tie {
+        color: #ffc107; /* Color dorado para el icono de entrenador */
+    }
+</style>

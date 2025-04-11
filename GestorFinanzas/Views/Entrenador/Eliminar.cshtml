@@ -1,0 +1,43 @@
+﻿@model GrandesLigas.Models.Entrenador
+
+@{
+    ViewData["Title"] = "Eliminar Entrenador";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-danger text-white">
+                    <h4 class="text-center"><i class="fas fa-exclamation-triangle me-2"></i>@ViewData["Title"]</h4>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-warning">
+                        <h5 class="alert-heading">¿Está seguro de eliminar este entrenador?</h5>
+                        <hr>
+                        <dl class="row">
+                            <dt class="col-sm-4">Nombre:</dt>
+                            <dd class="col-sm-8">@Model.Nombre</dd>
+
+                            <dt class="col-sm-4">Especialidad:</dt>
+                            <dd class="col-sm-8">@Model.Especialidad</dd>
+                        </dl>
+                    </div>
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="text-center mt-3">
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fas fa-trash-alt me-2"></i>Confirmar Eliminación
+                            </button>
+                            <a href="@Url.Action("Index")" class="btn btn-secondary ms-2">
+                                <i class="fas fa-times me-2"></i>Cancelar
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "5m2bPCwBmRLnv8yWKzAFsNK1p/S8Kp0WZYG3jIdYIFo=",
+  "Hash": "ptzprEwl0/rYZ/sLyVvy5cFyNdm5hjcTSs/HKvlXHqU=",
   "Source": "GrandesLigas",
   "BasePath": "_content/GrandesLigas",
   "Mode": "Default",
@@ -73,8 +73,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "jcij6ayvrh",
-      "Integrity": "XQ5VndK/HZjOUCkJ4LWYT3VHUUPku24mIvAtLsHo3zg=",
+      "Fingerprint": "9nmqfozt5d",
+      "Integrity": "JTSorAG06wZkODMeM1YP5nXbYgfJwZLFMwdY6gqtPzo=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
@@ -120,6 +120,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\baseball-action.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\MVega\\source\\repos\\GrandesLigas\\GrandesLigas\\GestorFinanzas\\wwwroot\\images\\baseball-stadium.jpg",
+      "SourceId": "GrandesLigas",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\MVega\\source\\repos\\GrandesLigas\\GrandesLigas\\GestorFinanzas\\wwwroot\\",
+      "BasePath": "_content/GrandesLigas",
+      "RelativePath": "images/baseball-stadium#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "jeyxw7qa6s",
+      "Integrity": "a+gifaRha6xwxRiqOWbxOpZ2g8XukdIV/1qtxSBtkeQ=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\baseball-stadium.jpg"
     },
     {
       "Identity": "C:\\Users\\MVega\\source\\repos\\GrandesLigas\\GrandesLigas\\GestorFinanzas\\wwwroot\\images\\baseball-stadium-night.jpg",
@@ -1447,6 +1468,51 @@
   ],
   "Endpoints": [
     {
+      "Route": "css/site.9nmqfozt5d.css",
+      "AssetFile": "C:\\Users\\MVega\\source\\repos\\GrandesLigas\\GrandesLigas\\GestorFinanzas\\wwwroot\\css\\site.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "971"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"JTSorAG06wZkODMeM1YP5nXbYgfJwZLFMwdY6gqtPzo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 09 Apr 2025 15:28:20 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "9nmqfozt5d"
+        },
+        {
+          "Name": "label",
+          "Value": "css/site.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-JTSorAG06wZkODMeM1YP5nXbYgfJwZLFMwdY6gqtPzo="
+        }
+      ]
+    },
+    {
       "Route": "css/site.css",
       "AssetFile": "C:\\Users\\MVega\\source\\repos\\GrandesLigas\\GrandesLigas\\GestorFinanzas\\wwwroot\\css\\site.css",
       "Selectors": [],
@@ -1457,7 +1523,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "763"
+          "Value": "971"
         },
         {
           "Name": "Content-Type",
@@ -1465,11 +1531,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"XQ5VndK/HZjOUCkJ4LWYT3VHUUPku24mIvAtLsHo3zg=\""
+          "Value": "\"JTSorAG06wZkODMeM1YP5nXbYgfJwZLFMwdY6gqtPzo=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 08 Apr 2025 02:17:20 GMT"
+          "Value": "Wed, 09 Apr 2025 15:28:20 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1479,52 +1545,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-XQ5VndK/HZjOUCkJ4LWYT3VHUUPku24mIvAtLsHo3zg="
-        }
-      ]
-    },
-    {
-      "Route": "css/site.jcij6ayvrh.css",
-      "AssetFile": "C:\\Users\\MVega\\source\\repos\\GrandesLigas\\GrandesLigas\\GestorFinanzas\\wwwroot\\css\\site.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "763"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"XQ5VndK/HZjOUCkJ4LWYT3VHUUPku24mIvAtLsHo3zg=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Tue, 08 Apr 2025 02:17:20 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "jcij6ayvrh"
-        },
-        {
-          "Name": "label",
-          "Value": "css/site.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-XQ5VndK/HZjOUCkJ4LWYT3VHUUPku24mIvAtLsHo3zg="
+          "Value": "sha256-JTSorAG06wZkODMeM1YP5nXbYgfJwZLFMwdY6gqtPzo="
         }
       ]
     },
@@ -1633,7 +1654,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 08 Apr 2025 18:28:28 GMT"
+          "Value": "Fri, 11 Apr 2025 22:40:46 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1670,7 +1691,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 08 Apr 2025 18:28:28 GMT"
+          "Value": "Fri, 11 Apr 2025 22:40:46 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1715,7 +1736,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 08 Apr 2025 18:28:28 GMT"
+          "Value": "Fri, 11 Apr 2025 22:40:46 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1760,7 +1781,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 08 Apr 2025 18:28:28 GMT"
+          "Value": "Fri, 11 Apr 2025 22:40:46 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1853,6 +1874,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-nM9O6rOHcm+VTydyFujlRCg/Jt4et9ylgUGzg27RWq4="
+        }
+      ]
+    },
+    {
+      "Route": "images/baseball-stadium.jeyxw7qa6s.jpg",
+      "AssetFile": "C:\\Users\\MVega\\source\\repos\\GrandesLigas\\GrandesLigas\\GestorFinanzas\\wwwroot\\images\\baseball-stadium.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "451359"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"a+gifaRha6xwxRiqOWbxOpZ2g8XukdIV/1qtxSBtkeQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 11 Apr 2025 16:59:56 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "jeyxw7qa6s"
+        },
+        {
+          "Name": "label",
+          "Value": "images/baseball-stadium.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-a+gifaRha6xwxRiqOWbxOpZ2g8XukdIV/1qtxSBtkeQ="
+        }
+      ]
+    },
+    {
+      "Route": "images/baseball-stadium.jpg",
+      "AssetFile": "C:\\Users\\MVega\\source\\repos\\GrandesLigas\\GrandesLigas\\GestorFinanzas\\wwwroot\\images\\baseball-stadium.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "451359"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"a+gifaRha6xwxRiqOWbxOpZ2g8XukdIV/1qtxSBtkeQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 11 Apr 2025 16:59:56 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-a+gifaRha6xwxRiqOWbxOpZ2g8XukdIV/1qtxSBtkeQ="
         }
       ]
     },

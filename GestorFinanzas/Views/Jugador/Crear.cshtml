@@ -1,0 +1,135 @@
+﻿@model GrandesLigas.Models.Jugador
+
+@{
+    ViewData["Title"] = "Crear Jugador";
+}
+
+<h2 class="text-center my-4">Registrar Nuevo Jugador</h2>
+
+@using (Html.BeginForm("Crear", "Jugador", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-lg">
+                    <div class="card-header text-center bg-primary text-white">
+                        <h4><i class="fas fa-user-plus me-2"></i>Datos del Jugador</h4>
+                    </div>
+                    <div class="card-body">
+                        <!-- Nombre del Jugador -->
+                        <div class="form-group mb-3">
+                            @Html.LabelFor(model => model.Nombre, new { @class = "form-label fw-bold" })
+                            @Html.TextBoxFor(model => model.Nombre,
+                                     new
+                                     {
+                                         @class = "form-control",
+                                         placeholder = "Ingrese el nombre completo del jugador",
+                                         required = "required"
+                                     })
+                            @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                        </div>
+
+                        <!-- Posición -->
+                        <div class="form-group mb-3">
+                            @Html.LabelFor(model => model.Posicion, new { @class = "form-label fw-bold" })
+                            @Html.DropDownListFor(model => model.Posicion,
+                                     new SelectList(new List<string> {
+                        "Pitcher", "Catcher", "Primera Base", "Segunda Base",
+                        "Tercera Base", "Shortstop", "Left Fielder",
+                        "Center Fielder", "Right Fielder", "Designated Hitter"
+                        }),
+                                     "Seleccione una posición",
+                                     new { @class = "form-select", required = "required" })
+                            @Html.ValidationMessageFor(model => model.Posicion, "", new { @class = "text-danger" })
+                        </div>
+
+                        <!-- Fecha de Nacimiento -->
+                        <div class="form-group mb-3">
+                            @Html.LabelFor(model => model.FechaNacimiento, new { @class = "form-label fw-bold" })
+                            @Html.TextBoxFor(model => model.FechaNacimiento, "{0:yyyy-MM-dd}",
+                                     new { @class = "form-control", type = "date" })
+                            @Html.ValidationMessageFor(model => model.FechaNacimiento, "", new { @class = "text-danger" })
+                        </div>
+
+                        <!-- Foto -->
+                        <div class="form-group mb-3">
+                            @Html.LabelFor(model => model.Foto, new { @class = "form-label fw-bold" })
+                            <div class="input-group">
+                                <input type="file" class="form-control" id="FotoInput" name="FotoFile" accept="image/*" />
+                                @Html.HiddenFor(model => model.Foto)
+                            </div>
+                            @Html.ValidationMessageFor(model => model.Foto, "", new { @class = "text-danger" })
+                            <small class="text-muted">Suba una imagen del jugador (JPEG/PNG, máx. 5MB)</small>
+                        </div>
+
+                        <div class="form-group text-center mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-save me-2"></i>Guardar Jugador
+                            </button>
+                            <a href="@Url.Action("Index", "Jugador")" class="btn btn-outline-secondary btn-lg ms-3">
+                                <i class="fas fa-times me-2"></i>Cancelar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Validación de imagen
+            document.getElementById('FotoInput').addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                const maxSize = 5 * 1024 * 1024; // 5MB
+
+                if (file) {
+                    // Validar tamaño
+                    if (file.size > maxSize) {
+                        alert('La imagen es demasiado grande (máximo 5MB)');
+                        e.target.value = '';
+                        return;
+                    }
+
+                    // Validar tipo de archivo
+                    if (!file.type.match('image.*')) {
+                        alert('Por favor seleccione un archivo de imagen (JPEG/PNG)');
+                        e.target.value = '';
+                        return;
+                    }
+
+                    // Convertir a base64
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const base64String = e.target.result.split(',')[1];
+                        document.getElementById('Foto').value = base64String;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        });
+    </script>
+}
+
+<style>
+    .card {
+        border-radius: 10px;
+    }
+
+    .card-header {
+        border-radius: 10px 10px 0 0 !important;
+    }
+
+    .form-control, .form-select {
+        border-radius: 5px;
+    }
+
+    .btn-lg {
+        padding: 0.5rem 1.5rem;
+        font-size: 1.1rem;
+    }
+</style>

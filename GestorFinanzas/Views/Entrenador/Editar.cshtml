@@ -1,0 +1,93 @@
+﻿@model GrandesLigas.Models.Entrenador
+
+@{
+    ViewData["Title"] = "Editar Entrenador";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white text-center">
+                    <h4><i class="fas fa-user-edit me-2"></i>Editar Entrenador: @Model.Nombre</h4>
+                </div>
+                <div class="card-body">
+                    @using (Html.BeginForm("Editar", "Entrenador", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.EntrenadorId)
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <!-- Nombre -->
+                                <div class="form-group mb-3">
+                                    @Html.LabelFor(model => model.Nombre, new { @class = "form-label fw-bold" })
+                                    @Html.TextBoxFor(model => model.Nombre,
+                                             new
+                                             {
+                                                 @class = "form-control",
+                                                 placeholder = "Nombre completo del entrenador",
+                                                 required = "required"
+                                             })
+                                    @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <!-- Especialidad -->
+                                <div class="form-group mb-3">
+                                    @Html.LabelFor(model => model.Especialidad, new { @class = "form-label fw-bold" })
+                                    @Html.DropDownListFor(model => model.Especialidad,
+                                             new SelectList(new List<string> {
+                                "Pitcheo", "Bateo", "Infield", "Outfield",
+                                "Fuerza y Condición", "Estrategia", "Bullpen",
+                                "Primera Base", "Tercera Base", "Bench Coach",
+                                "Manager", "Coach de Bullpen", "Coach de Bateo"
+                                }, Model.Especialidad), // Aquí está el cambio clave
+                                             "Seleccione una especialidad",
+                                             new { @class = "form-select", required = "required" })
+                                    @Html.ValidationMessageFor(model => model.Especialidad, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-center mt-4">
+                            <button type="submit" class="btn btn-primary me-3">
+                                <i class="fas fa-save me-2"></i>Guardar Cambios
+                            </button>
+                            <a href="@Url.Action("Index", "Entrenador")" class="btn btn-outline-secondary">
+                                <i class="fas fa-times me-2"></i>Cancelar
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+<style>
+    .card {
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .card-header {
+        border-radius: 0 !important;
+    }
+
+    .form-control, .form-select {
+        border-radius: 5px;
+    }
+
+    .btn {
+        border-radius: 5px;
+        min-width: 150px;
+    }
+</style>

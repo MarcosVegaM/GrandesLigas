@@ -34,3 +34,10 @@ body {
     object-fit: cover; /* Recorta la imagen para ajustarse sin deformarse */
     border-radius: 10px; /* Opcional: Bordes redondeados */
 }
+.navbar-brand {
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.5px; /* Espaciado entre letras (opcional) */
+    color: white !important;
+}
+

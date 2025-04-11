@@ -21,6 +21,10 @@
       "PackagePath": "staticwebassets\\images\\baseball-stadium-night.jpg"
     },
     {
+      "Id": "C:\\Users\\MVega\\source\\repos\\GrandesLigas\\GrandesLigas\\GestorFinanzas\\wwwroot\\images\\baseball-stadium.jpg",
+      "PackagePath": "staticwebassets\\images\\baseball-stadium.jpg"
+    },
+    {
       "Id": "C:\\Users\\MVega\\source\\repos\\GrandesLigas\\GrandesLigas\\GestorFinanzas\\wwwroot\\images\\baseball-trophy.jpg",
       "PackagePath": "staticwebassets\\images\\baseball-trophy.jpg"
     },

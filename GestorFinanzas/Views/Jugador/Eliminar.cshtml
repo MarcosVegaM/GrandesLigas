@@ -1,0 +1,138 @@
+﻿@model GrandesLigas.Models.Jugador
+
+@{
+    ViewData["Title"] = "Eliminar Jugador";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg">
+                <div class="card-header bg-danger text-white text-center">
+                    <h4><i class="fas fa-exclamation-triangle me-2"></i>Eliminar Jugador: @Model.Nombre</h4>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-danger" role="alert">
+                        <h5 class="alert-heading text-center">
+                            <i class="fas fa-skull-crossbones me-2"></i>¡Acción Irreversible!
+                        </h5>
+                        <p class="text-center mb-0">
+                            Esta acción eliminará permanentemente al jugador y todos sus datos asociados.
+                        </p>
+                    </div>
+
+                    <div class="row">
+                        <!-- Información del Jugador -->
+                        <div class="col-md-6">
+                            <div class="mb-4">
+                                <h5 class="text-center"><i class="fas fa-info-circle me-2"></i>Detalles del Jugador</h5>
+                                <hr>
+                                <div class="mb-3">
+                                    <strong><i class="fas fa-id-card me-2"></i>ID Jugador:</strong>
+                                    <span class="float-end badge bg-dark">@Model.JugadorId</span>
+                                </div>
+                                <div class="mb-3">
+                                    <strong><i class="fas fa-user me-2"></i>Nombre:</strong>
+                                    <span class="float-end fw-bold">@Model.Nombre</span>
+                                </div>
+                                <div class="mb-3">
+                                    <strong><i class="fas fa-map-marker-alt me-2"></i>Posición:</strong>
+                                    <span class="float-end badge bg-primary">@Model.Posicion</span>
+                                </div>
+                                @if (Model.FechaNacimiento.HasValue)
+                                {
+                                    <div class="mb-3">
+                                        <strong><i class="fas fa-birthday-cake me-2"></i>Edad:</strong>
+                                        <span class="float-end">
+                                            @((DateTime.Now.Year - Model.FechaNacimiento.Value.Year)) años
+                                        </span>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+
+                        <!-- Foto del Jugador -->
+                        <div class="col-md-6 text-center">
+                            @if (Model.Foto != null && Model.Foto.Length > 0)
+                            {
+                                <div class="mb-3">
+                                    <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Foto)"
+                                         class="img-thumbnail shadow" alt="Foto del jugador"
+                                         style="max-height: 250px; border: 3px solid #dc3545;">
+                                    <p class="text-muted mt-2">Foto actual del jugador</p>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="mb-3">
+                                    <div class="no-photo-placeholder bg-light p-4 rounded shadow">
+                                        <i class="fas fa-user-slash fa-4x text-secondary"></i>
+                                        <p class="mt-2 mb-0 fw-bold">Sin foto registrada</p>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4 bg-light p-3 rounded">
+                        <h5 class="text-danger mb-3">
+                            <i class="fas fa-radiation me-2"></i>¿Confirmar eliminación permanente?
+                        </h5>
+                        <p class="mb-0">
+                            Esta acción no puede deshacerse. Todos los datos del jugador se perderán.
+                        </p>
+                    </div>
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.JugadorId)
+
+                        <div class="d-flex justify-content-center mt-4 gap-3">
+                            <button type="submit" class="btn btn-danger btn-lg">
+                                <i class="fas fa-trash-alt me-2"></i>Eliminar Definitivamente
+                            </button>
+                            <a href="@Url.Action("Index", "Jugador")" class="btn btn-outline-secondary btn-lg">
+                                <i class="fas fa-times-circle me-2"></i>Cancelar
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .no-photo-placeholder {
+        width: 250px;
+        height: 250px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        border: 2px dashed #6c757d;
+    }
+
+    .card {
+        border: 2px solid #dc3545;
+        border-radius: 10px;
+    }
+
+    .card-header {
+        border-radius: 8px 8px 0 0 !important;
+    }
+
+    .alert-danger {
+        border-left: 5px solid #dc3545;
+    }
+
+    .img-thumbnail {
+        transition: transform 0.3s;
+    }
+
+        .img-thumbnail:hover {
+            transform: scale(1.05);
+        }
+</style>

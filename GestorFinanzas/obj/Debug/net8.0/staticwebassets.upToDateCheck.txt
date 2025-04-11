@@ -1,6 +1,7 @@
 wwwroot\css\site.css
 wwwroot\favicon.ico
 wwwroot\images\baseball-action.jpg
+wwwroot\images\baseball-stadium.jpg
 wwwroot\images\baseball-stadium-night.jpg
 wwwroot\images\baseball-trophy.jpg
 wwwroot\images\slide1.jpg

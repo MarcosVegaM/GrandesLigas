@@ -2,6 +2,7 @@ using GrandesLigasAPI.Services;
 using GrandesLigasAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using GrandesLigas.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -37,6 +38,9 @@ options.UseSqlServer(
 //Registrar servicios
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<ILigaService, LigaService>();
+builder.Services.AddScoped<IJugadorService, JugadorService>();
+builder.Services.AddScoped<IEntrenadorService, EntrenadorService>();
+builder.Services.AddScoped<IEquipoService, EquipoService>();
 
 var app = builder.Build();
 

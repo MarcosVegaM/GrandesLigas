@@ -1,0 +1,161 @@
+﻿@model IEnumerable<GrandesLigas.Models.Jugador>
+
+@{
+    ViewData["Title"] = "Lista de Jugadores";
+}
+
+<h2 class="text-center my-4"><i class="fas fa-users me-2"></i>Plantilla de Jugadores</h2>
+
+<!-- TOAST DE ÉXITO -->
+@if (TempData["SuccessMessage"] != null)
+{
+    <div id="successToast" class="toast position-fixed bottom-0 end-0 p-3" style="z-index: 1050;" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header bg-success text-white">
+            <strong class="me-auto">Éxito</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Cerrar"></button>
+        </div>
+        <div class="toast-body">
+            @TempData["SuccessMessage"]
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var successToast = new bootstrap.Toast(document.getElementById('successToast'), { delay: 3000 });
+            successToast.show();
+        });
+    </script>
+}
+
+<!-- TOAST DE ERROR -->
+@if (TempData["ErrorMessage"] != null)
+{
+    <div id="errorToast" class="toast position-fixed bottom-0 end-0 p-3" style="z-index: 1050;" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header bg-danger text-white">
+            <strong class="me-auto">Error</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Cerrar"></button>
+        </div>
+        <div class="toast-body">
+            @TempData["ErrorMessage"]
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var errorToast = new bootstrap.Toast(document.getElementById('errorToast'), { delay: 3000 });
+            errorToast.show();
+        });
+    </script>
+}
+
+<div class="text-center mb-4">
+    <a href="@Url.Action("Crear")" class="btn btn-primary btn-lg">
+        <i class="fas fa-plus-circle me-2"></i>Registrar Nuevo Jugador
+    </a>
+</div>
+
+<div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
+    @foreach (var jugador in Model)
+    {
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                <!-- Foto del Jugador -->
+                <div class="text-center pt-3">
+                    @if (jugador.Foto != null && jugador.Foto.Length > 0)
+                    {
+                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(jugador.Foto)"
+                             class="card-img-top rounded" alt="Foto del jugador" style="width: 200px; height: 200px; object-fit: cover;">
+                    }
+                    else
+                    {
+                        <div class="mx-auto bg-light rounded d-flex align-items-center justify-content-center"
+                             style="width: 200px; height: 200px;">
+                            <i class="fas fa-user fa-4x text-secondary"></i>
+                        </div>
+                    }
+                </div>
+
+                <!-- Datos del Jugador -->
+                <div class="card-body text-center">
+                    <h4 class="card-title text-primary mb-3">@jugador.Nombre</h4>
+                    <div class="d-flex justify-content-center gap-2 mb-3">
+                        <span class="badge bg-dark">#@jugador.JugadorId</span>
+                        <span class="badge bg-success">@jugador.Posicion</span>
+                    </div>
+
+                    @if (jugador.FechaNacimiento.HasValue)
+                    {
+                        <p class="card-text">
+                            <small class="text-muted">
+                                <i class="fas fa-birthday-cake me-1"></i>
+                                @jugador.FechaNacimiento.Value.ToShortDateString()
+                                (@(DateTime.Now.Year - jugador.FechaNacimiento.Value.Year) años)
+                            </small>
+                        </p>
+                    }
+                </div>
+
+                <!-- Acciones -->
+                <div class="card-footer bg-transparent">
+                    <div class="d-flex justify-content-center gap-2">
+                        <a href="@Url.Action("Editar", new { id = jugador.JugadorId })"
+                           class="btn btn-warning btn-sm">
+                            <i class="fas fa-edit me-1"></i>Editar
+                        </a>
+                        <a href="@Url.Action("Eliminar", new { id = jugador.JugadorId })"
+                           class="btn btn-danger btn-sm">
+                            <i class="fas fa-trash-alt me-1"></i>Eliminar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<!-- Estilos adicionales -->
+<style>
+    .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-radius: 15px;
+        overflow: hidden;
+        border: 1px solid rgba(0,0,0,0.1);
+    }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+    .card-img-top {
+        border: 3px solid #f8f9fa;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        margin: 0 auto;
+        transition: transform 0.3s;
+    }
+
+    .card:hover .card-img-top {
+        transform: scale(1.03);
+    }
+
+    .badge {
+        font-size: 0.85rem;
+        padding: 0.35em 0.65em;
+        font-weight: 500;
+    }
+
+    .card-footer {
+        padding: 1rem;
+        background-color: rgba(0,0,0,0.03);
+        border-top: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .card-title {
+        font-weight: 600;
+        font-size: 1.1rem;
+        min-height: 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>

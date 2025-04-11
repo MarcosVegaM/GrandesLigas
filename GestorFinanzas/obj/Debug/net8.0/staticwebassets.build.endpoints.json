@@ -29,7 +29,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 08 Apr 2025 18:28:28 GMT"
+          "Value": "Fri, 11 Apr 2025 22:40:46 GMT"
         }
       ],
       "EndpointProperties": [
@@ -74,13 +74,58 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 08 Apr 2025 18:28:28 GMT"
+          "Value": "Fri, 11 Apr 2025 22:40:46 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
           "Value": "sha256-2OAWr2cE/IdO4I8W+2d3QA9kw5Qihn2BeMynpVqovcQ="
+        }
+      ]
+    },
+    {
+      "Route": "css/site.9nmqfozt5d.css",
+      "AssetFile": "css/site.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "971"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"JTSorAG06wZkODMeM1YP5nXbYgfJwZLFMwdY6gqtPzo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 09 Apr 2025 15:28:20 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "9nmqfozt5d"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-JTSorAG06wZkODMeM1YP5nXbYgfJwZLFMwdY6gqtPzo="
+        },
+        {
+          "Name": "label",
+          "Value": "css/site.css"
         }
       ]
     },
@@ -99,7 +144,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "763"
+          "Value": "971"
         },
         {
           "Name": "Content-Type",
@@ -107,62 +152,17 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"XQ5VndK/HZjOUCkJ4LWYT3VHUUPku24mIvAtLsHo3zg=\""
+          "Value": "\"JTSorAG06wZkODMeM1YP5nXbYgfJwZLFMwdY6gqtPzo=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 08 Apr 2025 02:17:20 GMT"
+          "Value": "Wed, 09 Apr 2025 15:28:20 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-XQ5VndK/HZjOUCkJ4LWYT3VHUUPku24mIvAtLsHo3zg="
-        }
-      ]
-    },
-    {
-      "Route": "css/site.jcij6ayvrh.css",
-      "AssetFile": "css/site.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "763"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"XQ5VndK/HZjOUCkJ4LWYT3VHUUPku24mIvAtLsHo3zg=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Tue, 08 Apr 2025 02:17:20 GMT"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "jcij6ayvrh"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-XQ5VndK/HZjOUCkJ4LWYT3VHUUPku24mIvAtLsHo3zg="
-        },
-        {
-          "Name": "label",
-          "Value": "css/site.css"
+          "Value": "sha256-JTSorAG06wZkODMeM1YP5nXbYgfJwZLFMwdY6gqtPzo="
         }
       ]
     },
@@ -409,6 +409,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-dUIaAg302KNJcOXjyx3yLAYDSx36oDv+wTnT/5s3I0Q="
+        }
+      ]
+    },
+    {
+      "Route": "images/baseball-stadium.jeyxw7qa6s.jpg",
+      "AssetFile": "images/baseball-stadium.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "451359"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"a+gifaRha6xwxRiqOWbxOpZ2g8XukdIV/1qtxSBtkeQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 11 Apr 2025 16:59:56 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "jeyxw7qa6s"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-a+gifaRha6xwxRiqOWbxOpZ2g8XukdIV/1qtxSBtkeQ="
+        },
+        {
+          "Name": "label",
+          "Value": "images/baseball-stadium.jpg"
+        }
+      ]
+    },
+    {
+      "Route": "images/baseball-stadium.jpg",
+      "AssetFile": "images/baseball-stadium.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "451359"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"a+gifaRha6xwxRiqOWbxOpZ2g8XukdIV/1qtxSBtkeQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 11 Apr 2025 16:59:56 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-a+gifaRha6xwxRiqOWbxOpZ2g8XukdIV/1qtxSBtkeQ="
         }
       ]
     },
