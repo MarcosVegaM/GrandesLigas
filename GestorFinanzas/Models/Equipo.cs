@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace GrandesLigasAPI.Models
+namespace GrandesLigas.Models
 {
     public class Equipo
     {

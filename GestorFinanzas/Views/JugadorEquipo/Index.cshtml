@@ -1,0 +1,145 @@
+﻿@model IEnumerable<GrandesLigas.Models.JugadorEquipo>
+@using System.Linq
+@using GrandesLigas.Models
+@{
+    ViewData["Title"] = "Asignaciones Jugador-Equipo";
+
+    // Cargamos listas de jugadores y equipos desde ViewBag
+    var equiposList = ViewBag.Equipos as List<Equipo> ?? new List<Equipo>();
+    var jugadoresList = ViewBag.Jugadores as List<Jugador> ?? new List<Jugador>();
+
+    // Creamos diccionarios para búsqueda rápida
+    var equiposDict = equiposList.ToDictionary(e => e.EquipoId, e => e);
+    var jugadoresDict = jugadoresList.ToDictionary(j => j.JugadorId, j => j);
+}
+
+<div class="container mt-4">
+    <h1 class="mb-4">@ViewData["Title"]</h1>
+
+    <!-- TOAST DE ÉXITO -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div id="successToast" class="toast position-fixed bottom-0 end-0 p-3" style="z-index: 1050;" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-success text-white">
+                <strong class="me-auto">Éxito</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Cerrar"></button>
+            </div>
+            <div class="toast-body">
+                @TempData["SuccessMessage"]
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var successToast = new bootstrap.Toast(document.getElementById('successToast'), { delay: 3000 });
+                successToast.show();
+            });
+        </script>
+    }
+    <!-- TOAST DE ERROR -->
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div id="errorToast" class="toast position-fixed bottom-0 end-0 p-3" style="z-index: 1050;" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-danger text-white">
+                <strong class="me-auto">Error</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Cerrar"></button>
+            </div>
+            <div class="toast-body">
+                @TempData["ErrorMessage"]
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var errorToast = new bootstrap.Toast(document.getElementById('errorToast'), { delay: 3000 });
+                errorToast.show();
+            });
+        </script>
+    }
+
+
+    <!-- Botón para agregar nueva asignación -->
+    <div class="mb-4">
+        <a asp-action="Crear" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Agregar Nueva Asignación
+        </a>
+    </div>
+
+    <!-- Listado agrupado por equipos -->
+    @if (Model != null && Model.Any())
+    {
+        foreach (var grupo in Model.GroupBy(je => je.EquipoId))
+        {
+            var equipo = equiposDict.TryGetValue(grupo.Key, out var e) ? e : null;
+
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="h5 mb-0">
+                        @equipo?.Nombre
+                        @if (!string.IsNullOrEmpty(equipo?.Ciudad))
+                        {
+                            <span>(@equipo?.Ciudad)</span>
+                        }
+                        <span class="badge bg-warning text-dark ms-2">@grupo.Count() jugadore</span>
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Jugador</th>
+                                    <th>Posición</th>
+                                    <th>Fecha de Ingreso</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var relacion in grupo)
+                                {
+                                    var jugador = jugadoresDict.TryGetValue(relacion.JugadorId, out var j) ? j : null;
+                                    <tr>
+                                        <td>@jugador?.Nombre</td>
+                                        <td>@jugador?.Posicion</td>
+                                        <td>@(relacion.FechaIngreso?.ToString("dd/MM/yyyy") ?? "No especificada")</td>
+                                        <td>
+                                            <div class="btn-group" role="group">
+                                                <a asp-action="Eliminar" asp-route-id="@relacion.JugadorEquipoId" class="btn btn-sm btn-danger">
+                                                    <i class="fas fa-trash-alt"></i> Eliminar
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="alert alert-warning">
+            No hay asignaciones de jugadores a equipos registradas.
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        // Debug en consola
+        console.log("Datos cargados:", {
+            equipos: @Html.Raw(Json.Serialize(equiposList)),
+            jugadores: @Html.Raw(Json.Serialize(jugadoresList)),
+            relaciones: @Html.Raw(Json.Serialize(Model))
+        });
+
+        // Auto-cierre de alertas
+        window.setTimeout(function() {
+            $(".alert").fadeTo(500, 0).slideUp(500, function(){
+                $(this).remove();
+            });
+        }, 5000);
+    </script>
+}

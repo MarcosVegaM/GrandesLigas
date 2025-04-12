@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "8zmVTPet1zhmjjIIsE9zYlCAzDizru6+MUpgFq9mizk=",
+  "Hash": "98nRn95ATszo+rj/+4FuSV1P9sLQJkjN4GP8NaKVoKQ=",
   "Source": "GrandesLigasAPI",
   "BasePath": "_content/GrandesLigasAPI",
   "Mode": "Default",
@@ -1670,7 +1670,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 11 Apr 2025 23:05:57 GMT"
+          "Value": "Sat, 12 Apr 2025 22:13:00 GMT"
         }
       ],
       "EndpointProperties": [
@@ -1707,7 +1707,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 11 Apr 2025 23:05:57 GMT"
+          "Value": "Sat, 12 Apr 2025 22:13:00 GMT"
         }
       ],
       "EndpointProperties": [
@@ -7082,7 +7082,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 11 Apr 2025 23:05:57 GMT"
+          "Value": "Sat, 12 Apr 2025 22:13:01 GMT"
         },
         {
           "Name": "Link",
@@ -7131,7 +7131,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 11 Apr 2025 23:05:57 GMT"
+          "Value": "Sat, 12 Apr 2025 22:13:01 GMT"
         },
         {
           "Name": "Link",

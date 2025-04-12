@@ -1,4 +1,4 @@
-﻿using GrandesLigasAPI.Models;
+﻿using GrandesLigas.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http;
 using System.Text;
@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using GrandesLigas.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace GrandesLigasAPI.Controllers
+namespace GrandesLigas.Controllers
 {
     public class EquipoController : Controller
     {

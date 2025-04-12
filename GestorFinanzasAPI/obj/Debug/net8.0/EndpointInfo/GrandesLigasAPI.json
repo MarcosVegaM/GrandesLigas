@@ -380,6 +380,177 @@
         }
       }
     },
+    "/api/JugadorEquipo": {
+      "get": {
+        "tags": [
+          "JugadorEquipo"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "JugadorEquipo"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JugadorEquipo"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JugadorEquipo"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/JugadorEquipo"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/JugadorEquipo/{id}": {
+      "get": {
+        "tags": [
+          "JugadorEquipo"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "JugadorEquipo"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JugadorEquipo"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JugadorEquipo"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/JugadorEquipo"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "JugadorEquipo"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/JugadorEquipo/por-jugador/{jugadorId}": {
+      "get": {
+        "tags": [
+          "JugadorEquipo"
+        ],
+        "parameters": [
+          {
+            "name": "jugadorId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/JugadorEquipo/por-equipo/{equipoId}": {
+      "get": {
+        "tags": [
+          "JugadorEquipo"
+        ],
+        "parameters": [
+          {
+            "name": "equipoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Liga": {
       "get": {
         "tags": [
@@ -725,6 +896,33 @@
           "foto": {
             "type": "string",
             "format": "byte",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "JugadorEquipo": {
+        "required": [
+          "equipoId",
+          "jugadorId"
+        ],
+        "type": "object",
+        "properties": {
+          "jugadorEquipoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "jugadorId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "equipoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fechaIngreso": {
+            "type": "string",
+            "format": "date",
             "nullable": true
           }
         },

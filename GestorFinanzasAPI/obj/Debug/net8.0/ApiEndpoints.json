@@ -237,6 +237,117 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "GrandesLigasAPI.Controllers.JugadorEquipoController",
+    "Method": "GetJugadoresEquipos",
+    "RelativePath": "api/JugadorEquipo",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GrandesLigasAPI.Controllers.JugadorEquipoController",
+    "Method": "CreateJugadorEquipo",
+    "RelativePath": "api/JugadorEquipo",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "jugadorEquipo",
+        "Type": "GrandesLigasAPI.Models.JugadorEquipo",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GrandesLigasAPI.Controllers.JugadorEquipoController",
+    "Method": "GetJugadorEquipo",
+    "RelativePath": "api/JugadorEquipo/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GrandesLigasAPI.Controllers.JugadorEquipoController",
+    "Method": "UpdateJugadorEquipo",
+    "RelativePath": "api/JugadorEquipo/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "jugadorEquipo",
+        "Type": "GrandesLigasAPI.Models.JugadorEquipo",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GrandesLigasAPI.Controllers.JugadorEquipoController",
+    "Method": "DeleteJugadorEquipo",
+    "RelativePath": "api/JugadorEquipo/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GrandesLigasAPI.Controllers.JugadorEquipoController",
+    "Method": "GetJugadoresDeEquipo",
+    "RelativePath": "api/JugadorEquipo/por-equipo/{equipoId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "equipoId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GrandesLigasAPI.Controllers.JugadorEquipoController",
+    "Method": "GetEquiposDeJugador",
+    "RelativePath": "api/JugadorEquipo/por-jugador/{jugadorId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "jugadorId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "GrandesLigasAPI.Controllers.LigaController",
     "Method": "GetLigas",
     "RelativePath": "api/Liga",
