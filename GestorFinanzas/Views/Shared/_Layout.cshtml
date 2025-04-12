@@ -44,8 +44,22 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Equipo" asp-action="Index">Equipos</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="JugadorEquipo" asp-action="Index">Asignar un jugador a un equipo</a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-dark" href="#" id="asignacionesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-user-plus me-1"></i>Asignar
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="asignacionesDropdown">
+                                    <li>
+                                        <a class="dropdown-item" asp-controller="JugadorEquipo" asp-action="Index">
+                                            <i class="fas fa-users me-2"></i>Jugador a equipo
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-controller="JugadorEntrenador" asp-action="Index">
+                                            <i class="fas fa-user-tie me-2"></i>Jugador a entrenador
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="PanelPersonalizado" asp-action="Index">Panel personalizado</a>
