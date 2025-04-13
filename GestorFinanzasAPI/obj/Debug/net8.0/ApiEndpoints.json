@@ -538,6 +538,101 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "GrandesLigasAPI.Controllers.PartidoController",
+    "Method": "GetPartidos",
+    "RelativePath": "api/Partido",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GrandesLigasAPI.Controllers.PartidoController",
+    "Method": "CreatePartido",
+    "RelativePath": "api/Partido",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "partido",
+        "Type": "GrandesLigasAPI.Models.Partido",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GrandesLigasAPI.Controllers.PartidoController",
+    "Method": "GetPartido",
+    "RelativePath": "api/Partido/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GrandesLigasAPI.Controllers.PartidoController",
+    "Method": "UpdatePartido",
+    "RelativePath": "api/Partido/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "partido",
+        "Type": "GrandesLigasAPI.Models.Partido",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GrandesLigasAPI.Controllers.PartidoController",
+    "Method": "DeletePartido",
+    "RelativePath": "api/Partido/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GrandesLigasAPI.Controllers.PartidoController",
+    "Method": "GetPartidosPorLiga",
+    "RelativePath": "api/Partido/porliga/{ligaId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ligaId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "GrandesLigasAPI.Controllers.UsuarioController",
     "Method": "GetUsuarios",
     "RelativePath": "api/Usuario",

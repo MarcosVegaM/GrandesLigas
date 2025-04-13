@@ -1,0 +1,118 @@
+﻿@model GrandesLigas.Models.Partido
+@{
+    ViewData["Title"] = "Eliminar Partido";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-danger">
+                <div class="card-header bg-danger text-white text-center">
+                    <h4><i class="fas fa-exclamation-triangle me-2"></i>Confirmar Eliminación</h4>
+                </div>
+                <div class="card-body">
+                    <h5 class="text-center mb-4">¿Está seguro que desea eliminar este partido?</h5>
+
+                    <div class="alert alert-warning">
+                        <strong>¡Advertencia!</strong> Esta acción no se puede deshacer.
+                    </div>
+
+                    <div class="details-container">
+                        <!-- Detalles del Partido -->
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <strong>Liga:</strong>
+                                <span class="badge bg-secondary">@ViewBag.Liga.Nombre</span>
+                            </div>
+                            <div class="col-md-6">
+                                <strong>Fecha:</strong>
+                                <span>@Model.Fecha.ToString("dd/MM/yyyy HH:mm")</span>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <strong>Local:</strong>
+                                <span class="badge bg-primary">@ViewBag.EquipoLocal.Nombre (@ViewBag.EquipoLocal.Ciudad)</span>
+                            </div>
+                            <div class="col-md-6">
+                                <strong>Visitante:</strong>
+                                <span class="badge bg-danger">@ViewBag.EquipoVisitante.Nombre (@ViewBag.EquipoVisitante.Ciudad)</span>
+                            </div>
+                        </div>
+
+                        @if (!string.IsNullOrEmpty(Model.Lugar))
+                        {
+                            <div class="mb-3">
+                                <strong>Lugar:</strong>
+                                <span>@Model.Lugar</span>
+                            </div>
+                        }
+                    </div>
+
+
+                    @using (Html.BeginForm())
+                    {
+                         @Html.AntiForgeryToken()
+                         @Html.HiddenFor(model => model.PartidoId)
+                        <div class="d-flex justify-content-center mt-4">
+                            <button type="submit" class="btn btn-danger me-3">
+                                <i class="fas fa-trash-alt me-2"></i>Confirmar Eliminación
+                            </button>
+                            <a href="@Url.Action("Index", "Partido")" class="btn btn-outline-secondary">
+                                <i class="fas fa-times me-2"></i>Cancelar
+                            </a>
+                        </div>          
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        border-radius: 10px;
+    }
+
+    .border-danger {
+        border: 2px solid #dc3545;
+    }
+
+    .card-header {
+        border-radius: 8px 8px 0 0 !important;
+    }
+
+    .details-container {
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+
+    .badge {
+        font-size: 0.9rem;
+        padding: 0.4em 0.65em;
+    }
+
+    .bg-primary {
+        background-color: #0d6efd !important;
+    }
+
+    .bg-secondary {
+        background-color: #6c757d !important;
+    }
+
+    .bg-danger {
+        background-color: #dc3545 !important;
+    }
+
+    .btn {
+        min-width: 200px;
+        border-radius: 5px;
+    }
+
+    .fa-exclamation-triangle {
+        color: #ffc107;
+    }
+</style>

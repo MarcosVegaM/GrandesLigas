@@ -1,0 +1,152 @@
+﻿@model GrandesLigas.Models.Partido
+
+@{
+    ViewData["Title"] = "Editar Partido";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white text-center">
+                    <h4><i class="fas fa-edit me-2"></i>Editar Partido: @Model.PartidoId</h4>
+                </div>
+                <div class="card-body">
+                    @using (Html.BeginForm("Editar", "Partido", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.PartidoId)
+
+                        <div class="row">
+                            <!-- Liga -->
+                            <div class="col-md-6 mb-3">
+                                @Html.LabelFor(model => model.LigaId, "Liga", new { @class = "form-label fw-bold" })
+                                @Html.DropDownListFor(model => model.LigaId,
+                                         new SelectList(ViewBag.Ligas as List<SelectListItem>, "Value", "Text", Model.LigaId),
+                                         "Seleccione una liga",
+                                         new { @class = "form-select", required = "required" })
+                                @Html.ValidationMessageFor(model => model.LigaId, "", new { @class = "text-danger" })
+                            </div>
+
+                            <!-- Fecha -->
+                            <div class="col-md-6 mb-3">
+                                @Html.LabelFor(model => model.Fecha, new { @class = "form-label fw-bold" })
+                                @Html.TextBoxFor(model => model.Fecha,
+                                         new
+                                         {
+                                             @class = "form-control",
+                                             type = "datetime-local",
+                                             required = "required",
+                                             value = Model.Fecha.ToString("yyyy-MM-ddTHH:mm")
+                                         })
+                                @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <!-- Lugar -->
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.Lugar, new { @class = "form-label fw-bold" })
+                            @Html.TextBoxFor(model => model.Lugar,
+                                     new
+                                     {
+                                         @class = "form-control",
+                                         placeholder = "Ingrese el estadio o lugar del partido"
+                                     })
+                            @Html.ValidationMessageFor(model => model.Lugar, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="row">
+                            <!-- Equipo Local -->
+                            <div class="col-md-6 mb-3">
+                                @Html.LabelFor(model => model.EquipoLocalId, "Equipo Local", new { @class = "form-label fw-bold" })
+                                @Html.DropDownListFor(model => model.EquipoLocalId,
+                                         new SelectList(ViewBag.Equipos as List<SelectListItem>, "Value", "Text", Model.EquipoLocalId),
+                                         "Seleccione equipo local",
+                                         new { @class = "form-select equipo-select", required = "required" })
+                                @Html.ValidationMessageFor(model => model.EquipoLocalId, "", new { @class = "text-danger" })
+                            </div>
+
+                            <!-- Equipo Visitante -->
+                            <div class="col-md-6 mb-3">
+                                @Html.LabelFor(model => model.EquipoVisitanteId, "Equipo Visitante", new { @class = "form-label fw-bold" })
+                                @Html.DropDownListFor(model => model.EquipoVisitanteId,
+                                         new SelectList(ViewBag.Equipos as List<SelectListItem>, "Value", "Text", Model.EquipoVisitanteId),
+                                         "Seleccione equipo visitante",
+                                         new { @class = "form-select equipo-select", required = "required" })
+                                @Html.ValidationMessageFor(model => model.EquipoVisitanteId, "", new { @class = "text-danger" })
+                                <small id="equipoError" class="text-danger d-none">No puede seleccionar el mismo equipo como local y visitante</small>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-center mt-4">
+                            <button type="submit" id="submitBtn" class="btn btn-primary me-3">
+                                <i class="fas fa-save me-2"></i>Guardar Cambios
+                            </button>
+                            <a href="@Url.Action("Index", "Partido")" class="btn btn-outline-secondary">
+                                <i class="fas fa-times me-2"></i>Cancelar
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const equipoLocalSelect = document.getElementById('EquipoLocalId');
+            const equipoVisitanteSelect = document.getElementById('EquipoVisitanteId');
+            const equipoError = document.getElementById('equipoError');
+            const submitBtn = document.getElementById('submitBtn');
+
+            function validarEquipos() {
+                if (equipoLocalSelect.value && equipoVisitanteSelect.value &&
+                    equipoLocalSelect.value === equipoVisitanteSelect.value) {
+                    equipoError.classList.remove('d-none');
+                    submitBtn.disabled = true;
+                    return false;
+                } else {
+                    equipoError.classList.add('d-none');
+                    submitBtn.disabled = false;
+                    return true;
+                }
+            }
+
+            equipoLocalSelect.addEventListener('change', validarEquipos);
+            equipoVisitanteSelect.addEventListener('change', validarEquipos);
+
+            // Validación inicial al cargar la página
+            validarEquipos();
+        });
+    </script>
+}
+
+<style>
+    .card {
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .card-header {
+        border-radius: 0 !important;
+    }
+
+    .form-control, .form-select {
+        border-radius: 5px;
+    }
+
+    .btn {
+        border-radius: 5px;
+        min-width: 150px;
+    }
+
+    .fa-edit {
+        color: #ffc107;
+    }
+</style>

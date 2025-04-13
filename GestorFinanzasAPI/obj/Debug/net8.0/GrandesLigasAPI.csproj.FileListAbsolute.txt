@@ -79,7 +79,6 @@ C:\Users\MVega\source\repos\GrandesLigas\GrandesLigas\GestorFinanzasAPI\obj\Debu
 C:\Users\MVega\source\repos\GrandesLigas\GrandesLigas\GestorFinanzasAPI\obj\Debug\net8.0\GrandesLigasAPI.AssemblyInfoInputs.cache
 C:\Users\MVega\source\repos\GrandesLigas\GrandesLigas\GestorFinanzasAPI\obj\Debug\net8.0\GrandesLigasAPI.AssemblyInfo.cs
 C:\Users\MVega\source\repos\GrandesLigas\GrandesLigas\GestorFinanzasAPI\obj\Debug\net8.0\GrandesLigasAPI.csproj.CoreCompileInputs.cache
-C:\Users\MVega\source\repos\GrandesLigas\GrandesLigas\GestorFinanzasAPI\obj\Debug\net8.0\GrandesLigasAPI.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\MVega\source\repos\GrandesLigas\GrandesLigas\GestorFinanzasAPI\obj\Debug\net8.0\GrandesLigasAPI.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\MVega\source\repos\GrandesLigas\GrandesLigas\GestorFinanzasAPI\obj\Debug\net8.0\GrandesLigasAPI.sourcelink.json
 C:\Users\MVega\source\repos\GrandesLigas\GrandesLigas\GestorFinanzasAPI\obj\Debug\net8.0\scopedcss\bundle\GrandesLigasAPI.styles.css

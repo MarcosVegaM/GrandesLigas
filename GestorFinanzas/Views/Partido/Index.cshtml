@@ -1,0 +1,163 @@
+﻿@using GrandesLigas.Models
+@model IEnumerable<GrandesLigas.Models.Partido>
+
+@{
+    ViewData["Title"] = "Lista de Partidos";
+}
+
+<h2 class="text-center my-4">Calendario de Partidos</h2>
+
+<!-- TOAST DE ÉXITO -->
+@if (TempData["SuccessMessage"] != null)
+{
+    <div id="successToast" class="toast position-fixed bottom-0 end-0 p-3" style="z-index: 1050;" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header bg-success text-white">
+            <strong class="me-auto">Éxito</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Cerrar"></button>
+        </div>
+        <div class="toast-body">
+            @TempData["SuccessMessage"]
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var successToast = new bootstrap.Toast(document.getElementById('successToast'), { delay: 3000 });
+            successToast.show();
+        });
+    </script>
+}
+
+<!-- TOAST DE ERROR -->
+@if (TempData["ErrorMessage"] != null)
+{
+    <div id="errorToast" class="toast position-fixed bottom-0 end-0 p-3" style="z-index: 1050;" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header bg-danger text-white">
+            <strong class="me-auto">Error</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Cerrar"></button>
+        </div>
+        <div class="toast-body">
+            @TempData["ErrorMessage"]
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var errorToast = new bootstrap.Toast(document.getElementById('errorToast'), { delay: 3000 });
+            errorToast.show();
+        });
+    </script>
+}
+
+<div class="text-center mb-4">
+    <a href="@Url.Action("Crear")" class="btn btn-primary btn-lg">
+        <i class="fas fa-plus-circle me-2"></i>Agregar Nuevo Partido
+    </a>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-striped table-hover">
+        <thead class="table-info">
+            <tr>
+                <th>ID</th>
+                <th>Liga</th>
+                <th>Fecha</th>
+                <th>Lugar</th>
+                <th>Local</th>
+                <th>Visitante</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var partido in Model)
+            {
+                <tr>
+                    <td>@partido.PartidoId</td>
+                    <td>
+                        @{
+                            var liga = ViewBag.Ligas as List<Liga>;
+                            var nombreLiga = liga?.FirstOrDefault(l => l.Id == partido.LigaId)?.Nombre ?? "Desconocido";
+                        }
+                        <span class="badge bg-secondary">@nombreLiga</span>
+                    </td>
+                    <td>@partido.Fecha.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>@(partido.Lugar ?? "Por definir")</td>
+                    <td>
+                        @{
+                            var equipos = ViewBag.Equipos as List<Equipo>;
+                            var equipoLocal = equipos?.FirstOrDefault(e => e.EquipoId == partido.EquipoLocalId);
+                            var nombreLocal = equipoLocal?.Nombre ?? "Desconocido";
+                        }
+                        <span class="badge bg-primary">@nombreLocal</span>
+                    </td>
+                    <td>
+                        @{
+                            var equipoVisitante = equipos?.FirstOrDefault(e => e.EquipoId == partido.EquipoVisitanteId);
+                            var nombreVisitante = equipoVisitante?.Nombre ?? "Desconocido";
+                        }
+                        <span class="badge bg-danger">@nombreVisitante</span>
+                    </td>
+                    <td>
+                        <div class="d-flex gap-2">
+                            <a href="@Url.Action("Editar", new { id = partido.PartidoId })"
+                               class="btn btn-warning btn-sm">
+                                <i class="fas fa-edit me-1"></i>Editar
+                            </a>
+                            <a href="@Url.Action("Eliminar", new { id = partido.PartidoId })"
+                               class="btn btn-danger btn-sm">
+                                <i class="fas fa-trash-alt me-1"></i>Eliminar
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<style>
+    .table {
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+        .table thead th {
+            background-color: #0d6efd;
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+    .table-hover tbody tr:hover {
+        background-color: rgba(13, 110, 253, 0.05);
+    }
+
+    .badge {
+        font-size: 0.8rem;
+        padding: 0.35em 0.65em;
+        font-weight: 500;
+    }
+
+    .btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.8rem;
+    }
+
+    .bg-primary {
+        background-color: #0d6efd !important;
+    }
+
+    .bg-secondary {
+        background-color: #6c757d !important;
+    }
+
+    .bg-danger {
+        background-color: #dc3545 !important;
+    }
+
+    .bg-info {
+        background-color: #0dcaf0 !important;
+    }
+</style>
