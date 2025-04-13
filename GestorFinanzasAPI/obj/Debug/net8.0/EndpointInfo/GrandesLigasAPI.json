@@ -130,6 +130,177 @@
         }
       }
     },
+    "/api/EntrenadorEquipo": {
+      "get": {
+        "tags": [
+          "EntrenadorEquipo"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "EntrenadorEquipo"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EntrenadorEquipo"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EntrenadorEquipo"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EntrenadorEquipo"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/EntrenadorEquipo/{id}": {
+      "get": {
+        "tags": [
+          "EntrenadorEquipo"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "EntrenadorEquipo"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EntrenadorEquipo"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EntrenadorEquipo"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EntrenadorEquipo"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "EntrenadorEquipo"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/EntrenadorEquipo/por-entrenador/{entrenadorId}": {
+      "get": {
+        "tags": [
+          "EntrenadorEquipo"
+        ],
+        "parameters": [
+          {
+            "name": "entrenadorId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/EntrenadorEquipo/por-equipo/{equipoId}": {
+      "get": {
+        "tags": [
+          "EntrenadorEquipo"
+        ],
+        "parameters": [
+          {
+            "name": "equipoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Equipo": {
       "get": {
         "tags": [
@@ -823,6 +994,33 @@
             "maxLength": 100,
             "minLength": 0,
             "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EntrenadorEquipo": {
+        "required": [
+          "entrenadorId",
+          "equipoId"
+        ],
+        "type": "object",
+        "properties": {
+          "entrenadorEquipoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "entrenadorId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "equipoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fechaIngreso": {
+            "type": "string",
+            "format": "date",
             "nullable": true
           }
         },

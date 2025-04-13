@@ -16,5 +16,6 @@ namespace GrandesLigasAPI.Models
         public DbSet<Entrenador> Entrenadores { get; set; }
         public DbSet<Equipo> Equipos { get; set; }
         public DbSet<JugadorEquipo> JugadoresEquipos { get; set; }
+        public DbSet<EntrenadorEquipo> EntrenadoresEquipos { get; set; }
     }
 }

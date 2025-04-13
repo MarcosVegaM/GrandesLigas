@@ -1,0 +1,127 @@
+﻿@using GrandesLigas.Models
+@model GrandesLigas.Models.EntrenadorEquipo
+@{
+    ViewData["Title"] = "Crear Nueva Asignación Entrenador-Equipo";
+}
+
+<div class="container mt-4">
+    <h1 class="mb-4">@ViewData["Title"]</h1>
+
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="Crear" id="form-crear">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <!-- Selección de Entrenador -->
+                <div class="form-group mb-3">
+                    @Html.LabelFor(model => model.EntrenadorId, "Entrenador", new { @class = "form-label" })
+                    @Html.DropDownListFor(model => model.EntrenadorId, ViewBag.Entrenadores as List<SelectListItem>, "Seleccione un entrenador", new { @class = "form-control", id = "entrenador-select" })
+                    @Html.ValidationMessageFor(model => model.EntrenadorId, "", new { @class = "text-danger" })
+                </div>
+
+                <!-- Selección de Equipo -->
+                <div class="form-group mb-3">
+                    @Html.LabelFor(model => model.EquipoId, "Equipo", new { @class = "form-label" })
+                    @Html.DropDownListFor(model => model.EquipoId, ViewBag.Equipos as List<SelectListItem>, "Seleccione un equipo", new { @class = "form-control", id = "equipo-select" })
+                    @Html.ValidationMessageFor(model => model.EquipoId, "", new { @class = "text-danger" })
+                </div>
+
+                <!-- Fecha de Ingreso -->
+                <div class="form-group mb-3">
+                    @Html.LabelFor(model => model.FechaIngreso, "Fecha de Ingreso", new { @class = "form-label" })
+                    @Html.TextBoxFor(model => model.FechaIngreso, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+                    @Html.ValidationMessageFor(model => model.FechaIngreso, "", new { @class = "text-danger" })
+                    <small class="text-muted">Dejar en blanco para usar la fecha actual</small>
+                </div>
+
+                <!-- Botones de acción -->
+                <div class="d-flex justify-content-between mt-4">
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left me-2"></i>Volver al Listado
+                    </a>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save me-2"></i>Guardar Asignación
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Panel de información -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0"><i class="fas fa-info-circle me-2"></i>Información</h5>
+                </div>
+                <div class="card-body">
+                    <h6 class="card-title">Detalles del Entrenador</h6>
+                    <div id="entrenador-info" class="mb-3 p-3 bg-light rounded">
+                        <p class="mb-1"><strong>Nombre:</strong> <span id="entrenador-nombre">-</span></p>
+                        <p class="mb-1"><strong>Especialidad:</strong> <span id="entrenador-especialidad">-</span></p>
+                    </div>
+
+                    <h6 class="card-title">Detalles del Equipo</h6>
+                    <div id="equipo-info" class="p-3 bg-light rounded">
+                        <p class="mb-1"><strong>Nombre:</strong> <span id="equipo-nombre">-</span></p>
+                        <p class="mb-1"><strong>Ciudad:</strong> <span id="equipo-ciudad">-</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        $(document).ready(function() {
+            // Función para parsear el texto del SelectListItem (formato: "Nombre (Especialidad)")
+            function parseSelectText(text) {
+                if (!text) return { nombre: '', especialidad: '' };
+
+                // Formato esperado: "Nombre (Especialidad)"
+                const match = text.match(/^(.*?)\s*\((.*?)\)$/);
+
+                return match ? {
+                    nombre: match[1],
+                    especialidad: match[2]
+                } : {
+                    nombre: text,
+                    especialidad: ''
+                };
+            }
+
+            // Actualizar información del entrenador seleccionado
+            $('#entrenador-select').change(function() {
+                var selectedText = $(this).find('option:selected').text();
+                var entrenadorData = parseSelectText(selectedText);
+
+                $('#entrenador-nombre').text(entrenadorData.nombre || '-');
+                $('#entrenador-especialidad').text(entrenadorData.especialidad || '-');
+            });
+
+            // Actualizar información del equipo seleccionado
+            $('#equipo-select').change(function() {
+                var selectedText = $(this).find('option:selected').text();
+                var equipoData = parseSelectText(selectedText);
+
+                $('#equipo-nombre').text(equipoData.nombre || '-');
+                $('#equipo-ciudad').text(equipoData.especialidad || '-'); 
+            });
+
+            // Validación personalizada para evitar duplicados
+            $('#form-crear').submit(function(e) {
+                var entrenadorId = $('#entrenador-select').val();
+                var equipoId = $('#equipo-select').val();
+
+                if (!entrenadorId || !equipoId) {
+                    return true; // Dejar que la validación normal maneje campos requeridos
+                }
+
+                return true;
+            });
+        });
+    </script>
+}

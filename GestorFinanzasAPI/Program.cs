@@ -42,6 +42,7 @@ builder.Services.AddScoped<IJugadorService, JugadorService>();
 builder.Services.AddScoped<IEntrenadorService, EntrenadorService>();
 builder.Services.AddScoped<IEquipoService, EquipoService>();
 builder.Services.AddScoped<IJugadorEquipoService, JugadorEquipoService>();
+builder.Services.AddScoped<IEntrenadorEquipoService, EntrenadorEquipoService>();
 
 var app = builder.Build();
 

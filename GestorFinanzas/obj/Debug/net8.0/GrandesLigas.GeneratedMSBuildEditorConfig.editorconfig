@@ -36,6 +36,18 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZXN0YWJsZWNlckNvbnRyYXNlw7FhQ29uZmlybWFjaW9uLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/MVega/source/repos/GrandesLigas/GrandesLigas/GestorFinanzas/Views/EntrenadorEquipo/Crear.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW50cmVuYWRvckVxdWlwb1xDcmVhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MVega/source/repos/GrandesLigas/GrandesLigas/GestorFinanzas/Views/EntrenadorEquipo/Eliminar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW50cmVuYWRvckVxdWlwb1xFbGltaW5hci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MVega/source/repos/GrandesLigas/GrandesLigas/GestorFinanzas/Views/EntrenadorEquipo/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW50cmVuYWRvckVxdWlwb1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/MVega/source/repos/GrandesLigas/GrandesLigas/GestorFinanzas/Views/Entrenador/Crear.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW50cmVuYWRvclxDcmVhci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

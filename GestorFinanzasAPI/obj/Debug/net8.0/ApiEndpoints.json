@@ -79,6 +79,117 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "GrandesLigasAPI.Controllers.EntrenadorEquipoController",
+    "Method": "GetEntrenadoresEquipos",
+    "RelativePath": "api/EntrenadorEquipo",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GrandesLigasAPI.Controllers.EntrenadorEquipoController",
+    "Method": "CreateEntrenadorEquipo",
+    "RelativePath": "api/EntrenadorEquipo",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "entrenadorEquipo",
+        "Type": "GrandesLigasAPI.Models.EntrenadorEquipo",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GrandesLigasAPI.Controllers.EntrenadorEquipoController",
+    "Method": "GetEntrenadorEquipo",
+    "RelativePath": "api/EntrenadorEquipo/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GrandesLigasAPI.Controllers.EntrenadorEquipoController",
+    "Method": "UpdateEntrenadorEquipo",
+    "RelativePath": "api/EntrenadorEquipo/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "entrenadorEquipo",
+        "Type": "GrandesLigasAPI.Models.EntrenadorEquipo",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GrandesLigasAPI.Controllers.EntrenadorEquipoController",
+    "Method": "DeleteEntrenadorEquipo",
+    "RelativePath": "api/EntrenadorEquipo/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GrandesLigasAPI.Controllers.EntrenadorEquipoController",
+    "Method": "GetEquiposDeEntrenador",
+    "RelativePath": "api/EntrenadorEquipo/por-entrenador/{entrenadorId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "entrenadorId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GrandesLigasAPI.Controllers.EntrenadorEquipoController",
+    "Method": "GetEntrenadoresDeEquipo",
+    "RelativePath": "api/EntrenadorEquipo/por-equipo/{equipoId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "equipoId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "GrandesLigasAPI.Controllers.EquipoController",
     "Method": "GetEquipos",
     "RelativePath": "api/Equipo",

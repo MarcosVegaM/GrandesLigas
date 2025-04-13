@@ -204,3 +204,17 @@ C:\Users\MVega\source\repos\GrandesLigas\GrandesLigas\GestorFinanzas\obj\Debug\n
 C:\Users\MVega\source\repos\GrandesLigas\GrandesLigas\GestorFinanzas\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\MVega\source\repos\GrandesLigas\GrandesLigas\GestorFinanzas\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\MVega\source\repos\GrandesLigas\GrandesLigas\GestorFinanzas\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\MVega\source\repos\GrandesLigas\GrandesLigas\GestorFinanzas\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\MVega\source\repos\GrandesLigas\GrandesLigas\GestorFinanzas\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\MVega\source\repos\GrandesLigas\GrandesLigas\GestorFinanzas\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\MVega\source\repos\GrandesLigas\GrandesLigas\GestorFinanzas\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\MVega\source\repos\GrandesLigas\GrandesLigas\GestorFinanzas\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\MVega\source\repos\GrandesLigas\GrandesLigas\GestorFinanzas\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\MVega\source\repos\GrandesLigas\GrandesLigas\GestorFinanzas\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\MVega\source\repos\GrandesLigas\GrandesLigas\GestorFinanzas\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\MVega\source\repos\GrandesLigas\GrandesLigas\GestorFinanzas\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\MVega\source\repos\GrandesLigas\GrandesLigas\GestorFinanzas\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\MVega\source\repos\GrandesLigas\GrandesLigas\GestorFinanzas\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\MVega\source\repos\GrandesLigas\GrandesLigas\GestorFinanzas\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\MVega\source\repos\GrandesLigas\GrandesLigas\GestorFinanzas\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\MVega\source\repos\GrandesLigas\GrandesLigas\GestorFinanzas\obj\Debug\net8.0\staticwebassets.build.json
