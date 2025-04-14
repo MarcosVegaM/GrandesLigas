@@ -1,0 +1,195 @@
+﻿@using GrandesLigas.Models
+@model IEnumerable<GrandesLigas.Models.Resultado>
+
+@{
+    ViewData["Title"] = "Registro de Resultados";
+}
+
+<h2 class="text-center my-4">Resultados de Partidos</h2>
+
+<!-- TOAST DE ÉXITO -->
+@if (TempData["SuccessMessage"] != null)
+{
+    <div id="successToast" class="toast position-fixed bottom-0 end-0 p-3" style="z-index: 1050;" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header bg-success text-white">
+            <strong class="me-auto">Éxito</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Cerrar"></button>
+        </div>
+        <div class="toast-body">
+            @TempData["SuccessMessage"]
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var successToast = new bootstrap.Toast(document.getElementById('successToast'), { delay: 3000 });
+            successToast.show();
+        });
+    </script>
+}
+
+<!-- TOAST DE ERROR -->
+@if (TempData["ErrorMessage"] != null)
+{
+    <div id="errorToast" class="toast position-fixed bottom-0 end-0 p-3" style="z-index: 1050;" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header bg-danger text-white">
+            <strong class="me-auto">Error</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Cerrar"></button>
+        </div>
+        <div class="toast-body">
+            @TempData["ErrorMessage"]
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var errorToast = new bootstrap.Toast(document.getElementById('errorToast'), { delay: 3000 });
+            errorToast.show();
+        });
+    </script>
+}
+
+<div class="text-center mb-4">
+    <a href="@Url.Action("Crear")" class="btn btn-primary btn-lg">
+        <i class="fas fa-plus-circle me-2"></i>Registrar Nuevo Resultado
+    </a>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-striped table-hover">
+        <thead class="table-info">
+            <tr>
+                <th>ID</th>
+                <th>Partido</th>
+                <th>Local</th>
+                <th>Resultado</th>
+                <th>Visitante</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var resultado in Model)
+            {
+                var partido = ViewBag.Partidos as List<Partido>;
+                var partidoActual = partido?.FirstOrDefault(p => p.PartidoId == resultado.PartidoId);
+
+                <tr>
+                    <td>@resultado.ResultadoId</td>
+                    <td>
+                        @if (partidoActual != null)
+                        {
+                            <span class="badge bg-secondary">Partido #@partidoActual.PartidoId</span>
+                            <small class="d-block">@partidoActual.Fecha.ToString("dd/MM/yyyy")</small>
+                        }
+                        else
+                        {
+                            <span class="text-muted">Partido no encontrado</span>
+                        }
+                    </td>
+                    <td class="text-end">
+                        @if (partidoActual != null)
+                        {
+                            var equipos = ViewBag.Equipos as List<Equipo>;
+                            var equipoLocal = equipos?.FirstOrDefault(e => e.EquipoId == partidoActual.EquipoLocalId);
+                            <span class="badge bg-primary">@(equipoLocal?.Nombre ?? "Desconocido")</span>
+                        }
+                    </td>
+                    <td class="text-center fw-bold">
+                        @resultado.CarrerasLocal - @resultado.CarrerasVisitante
+                        @if (resultado.CarrerasLocal > resultado.CarrerasVisitante)
+                        {
+                            <span class="badge bg-success ms-2">Local</span>
+                        }
+                        else if (resultado.CarrerasVisitante > resultado.CarrerasLocal)
+                        {
+                            <span class="badge bg-danger ms-2">Visitante</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-warning text-dark ms-2">Empate</span>
+                        }
+                    </td>
+                    <td>
+                        @if (partidoActual != null)
+                        {
+                            var equipos = ViewBag.Equipos as List<Equipo>;
+                            var equipoVisitante = equipos?.FirstOrDefault(e => e.EquipoId == partidoActual.EquipoVisitanteId);
+                            <span class="badge bg-danger">@(equipoVisitante?.Nombre ?? "Desconocido")</span>
+                        }
+                    </td>
+                    <td>
+                        <div class="d-flex gap-2">
+                            <a href="@Url.Action("Editar", new { id = resultado.ResultadoId })"
+                               class="btn btn-warning btn-sm">
+                                <i class="fas fa-edit me-1"></i>Editar
+                            </a>
+                            <a href="@Url.Action("Eliminar", new { id = resultado.ResultadoId })"
+                               class="btn btn-danger btn-sm">
+                                <i class="fas fa-trash-alt me-1"></i>Eliminar
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<style>
+    .table {
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+        .table thead th {
+            background-color: #0d6efd;
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+    .table-hover tbody tr:hover {
+        background-color: rgba(13, 110, 253, 0.05);
+    }
+
+    .badge {
+        font-size: 0.8rem;
+        padding: 0.35em 0.65em;
+        font-weight: 500;
+    }
+
+    .btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.8rem;
+    }
+
+    .bg-primary {
+        background-color: #0d6efd !important;
+    }
+
+    .bg-secondary {
+        background-color: #6c757d !important;
+    }
+
+    .bg-danger {
+        background-color: #dc3545 !important;
+    }
+
+    .bg-success {
+        background-color: #198754 !important;
+    }
+
+    .bg-warning {
+        background-color: #ffc107 !important;
+    }
+
+    .bg-info {
+        background-color: #0dcaf0 !important;
+    }
+
+    .fw-bold {
+        font-weight: 600 !important;
+    }
+</style>

@@ -98,3 +98,4 @@ C:\Users\MVega\source\repos\GrandesLigas\GrandesLigas\GestorFinanzasAPI\obj\Debu
 C:\Users\MVega\source\repos\GrandesLigas\GrandesLigas\GestorFinanzasAPI\obj\Debug\net8.0\GrandesLigasAPI.pdb
 C:\Users\MVega\source\repos\GrandesLigas\GrandesLigas\GestorFinanzasAPI\obj\Debug\net8.0\GrandesLigasAPI.genruntimeconfig.cache
 C:\Users\MVega\source\repos\GrandesLigas\GrandesLigas\GestorFinanzasAPI\obj\Debug\net8.0\ref\GrandesLigasAPI.dll
+C:\Users\MVega\source\repos\GrandesLigas\GrandesLigas\GestorFinanzasAPI\obj\Debug\net8.0\GrandesLigasAPI.MvcApplicationPartsAssemblyInfo.cs

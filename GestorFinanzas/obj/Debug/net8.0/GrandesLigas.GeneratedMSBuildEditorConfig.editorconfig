@@ -40,6 +40,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FsZW5kYXJpb1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/MVega/source/repos/GrandesLigas/GrandesLigas/GestorFinanzas/Views/Clasificacion/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc2lmaWNhY2lvblxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/MVega/source/repos/GrandesLigas/GrandesLigas/GestorFinanzas/Views/EntrenadorEquipo/Crear.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW50cmVuYWRvckVxdWlwb1xDcmVhci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -150,6 +154,22 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/MVega/source/repos/GrandesLigas/GrandesLigas/GestorFinanzas/Views/Partido/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFydGlkb1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MVega/source/repos/GrandesLigas/GrandesLigas/GestorFinanzas/Views/Resultado/Crear.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzdWx0YWRvXENyZWFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MVega/source/repos/GrandesLigas/GrandesLigas/GestorFinanzas/Views/Resultado/Editar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzdWx0YWRvXEVkaXRhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MVega/source/repos/GrandesLigas/GrandesLigas/GestorFinanzas/Views/Resultado/Eliminar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzdWx0YWRvXEVsaW1pbmFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MVega/source/repos/GrandesLigas/GrandesLigas/GestorFinanzas/Views/Resultado/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzdWx0YWRvXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/MVega/source/repos/GrandesLigas/GrandesLigas/GestorFinanzas/Views/Shared/Error.cshtml]

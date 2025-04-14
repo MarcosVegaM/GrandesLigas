@@ -1,5 +1,52 @@
 [
   {
+    "ContainingType": "GrandesLigasAPI.Controllers.ClasificacionController",
+    "Method": "GetClasificaciones",
+    "RelativePath": "api/Clasificacion",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GrandesLigasAPI.Controllers.ClasificacionController",
+    "Method": "GetClasificacionPorEquipo",
+    "RelativePath": "api/Clasificacion/porequipo/{ligaId}/{equipoId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ligaId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "equipoId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GrandesLigasAPI.Controllers.ClasificacionController",
+    "Method": "GetClasificacionPorLiga",
+    "RelativePath": "api/Clasificacion/porliga/{ligaId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ligaId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "GrandesLigas.Controllers.EntrenadorController",
     "Method": "GetEntrenadores",
     "RelativePath": "api/Entrenador",
@@ -626,6 +673,101 @@
     "Parameters": [
       {
         "Name": "ligaId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GrandesLigasAPI.Controllers.ResultadoController",
+    "Method": "GetResultados",
+    "RelativePath": "api/Resultado",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GrandesLigasAPI.Controllers.ResultadoController",
+    "Method": "CreateResultado",
+    "RelativePath": "api/Resultado",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "resultado",
+        "Type": "GrandesLigasAPI.Models.Resultado",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GrandesLigasAPI.Controllers.ResultadoController",
+    "Method": "GetResultado",
+    "RelativePath": "api/Resultado/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GrandesLigasAPI.Controllers.ResultadoController",
+    "Method": "UpdateResultado",
+    "RelativePath": "api/Resultado/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "resultado",
+        "Type": "GrandesLigasAPI.Models.Resultado",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GrandesLigasAPI.Controllers.ResultadoController",
+    "Method": "DeleteResultado",
+    "RelativePath": "api/Resultado/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GrandesLigasAPI.Controllers.ResultadoController",
+    "Method": "GetResultadosPorPartido",
+    "RelativePath": "api/Resultado/porpartido/{partidoId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "partidoId",
         "Type": "System.Int32",
         "IsRequired": true
       }

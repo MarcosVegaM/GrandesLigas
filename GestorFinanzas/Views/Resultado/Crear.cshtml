@@ -1,0 +1,227 @@
+﻿@using GrandesLigas.Models
+@model GrandesLigas.Models.Resultado
+
+@{
+    ViewData["Title"] = "Registrar Resultado";
+}
+
+<h2 class="text-center my-4">Registrar Nuevo Resultado</h2>
+
+@using (Html.BeginForm("Crear", "Resultado", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-lg">
+                    <div class="card-header text-center bg-primary text-white">
+                        <h4><i class="fas fa-clipboard-check me-2"></i>Datos del Resultado</h4>
+                    </div>
+                    <div class="card-body">
+                        <!-- Partido -->
+                        <div class="form-group mb-3">
+                            @Html.LabelFor(model => model.PartidoId, "Partido", new { @class = "form-label fw-bold" })
+                            @Html.DropDownListFor(model => model.PartidoId,
+                                     new SelectList(ViewBag.Partidos as List<SelectListItem>, "Value", "Text"),
+                                     "Seleccione un partido",
+                                     new { @class = "form-select", required = "required", id = "partidoSelect" })
+                            @Html.ValidationMessageFor(model => model.PartidoId, "", new { @class = "text-danger" })
+                        </div>
+
+                        <!-- Información del Partido (se actualiza dinámicamente) -->
+                        <div id="partidoInfo" class="mb-4 p-3 bg-light rounded d-none">
+                            <div class="row">
+                                <div class="col-md-5 text-end">
+                                    <span id="equipoLocalNombre" class="fw-bold"></span>
+                                </div>
+                                <div class="col-md-2 text-center">
+                                    <span>vs</span>
+                                </div>
+                                <div class="col-md-5 text-start">
+                                    <span id="equipoVisitanteNombre" class="fw-bold"></span>
+                                </div>
+                            </div>
+                            <div class="text-center mt-2">
+                                <small id="fechaLugar" class="text-muted"></small>
+                            </div>
+                        </div>
+
+                        <!-- Carreras Local -->
+                        <div class="form-group mb-3">
+                            @Html.LabelFor(model => model.CarrerasLocal, "Carreras (Local)", new { @class = "form-label fw-bold" })
+                            @Html.TextBoxFor(model => model.CarrerasLocal,
+                                     new
+                                     {
+                                         @class = "form-control",
+                                         type = "number",
+                                         min = "0",
+                                         required = "required",
+                                         id = "carrerasLocal"
+                                     })
+                            @Html.ValidationMessageFor(model => model.CarrerasLocal, "", new { @class = "text-danger" })
+                        </div>
+
+                        <!-- Carreras Visitante -->
+                        <div class="form-group mb-3">
+                            @Html.LabelFor(model => model.CarrerasVisitante, "Carreras (Visitante)", new { @class = "form-label fw-bold" })
+                            @Html.TextBoxFor(model => model.CarrerasVisitante,
+                                     new
+                                     {
+                                         @class = "form-control",
+                                         type = "number",
+                                         min = "0",
+                                         required = "required",
+                                         id = "carrerasVisitante"
+                                     })
+                            @Html.ValidationMessageFor(model => model.CarrerasVisitante, "", new { @class = "text-danger" })
+                        </div>
+
+                        <!-- Resultado Preview -->
+                        <div class="alert alert-info text-center" id="resultadoPreview">
+                            <span id="resultadoTexto">Ingrese los resultados para ver el marcador</span>
+                        </div>
+
+                        <div class="form-group text-center mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-save me-2"></i>Guardar Resultado
+                            </button>
+                            <a href="@Url.Action("Index", "Resultado")" class="btn btn-outline-secondary btn-lg ms-3">
+                                <i class="fas fa-times me-2"></i>Cancelar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const partidoSelect = document.getElementById('partidoSelect');
+            const partidoInfo = document.getElementById('partidoInfo');
+            const equipoLocalNombre = document.getElementById('equipoLocalNombre');
+            const equipoVisitanteNombre = document.getElementById('equipoVisitanteNombre');
+            const fechaLugar = document.getElementById('fechaLugar');
+            const carrerasLocal = document.getElementById('carrerasLocal');
+            const carrerasVisitante = document.getElementById('carrerasVisitante');
+            const resultadoPreview = document.getElementById('resultadoPreview');
+            const resultadoTexto = document.getElementById('resultadoTexto');
+
+            // Diccionario para cachear información de partidos
+            const partidosData = {};
+
+            // Cargar información de partidos
+        @if (ViewBag.Partidos != null)
+        {
+            foreach (var item in ViewBag.Partidos as List<SelectListItem>)
+            {
+                if (item.Value != null)
+                {
+                    var partido = ViewBag.PartidosLista as List<Partido>;
+                    var p = partido?.FirstOrDefault(x => x.PartidoId.ToString() == item.Value);
+                    if (p != null)
+                    {
+                        var equipos = ViewBag.Equipos as List<Equipo>;
+                        var local = equipos?.FirstOrDefault(e => e.EquipoId == p.EquipoLocalId);
+                        var visitante = equipos?.FirstOrDefault(e => e.EquipoId == p.EquipoVisitanteId);
+                        <text>
+                                            partidosData["@item.Value"] = {
+                                                local: "@(local?.Nombre ?? "Desconocido")",
+                                                visitante: "@(visitante?.Nombre ?? "Desconocido")",
+                                                fecha: "@p.Fecha.ToString("dd/MM/yyyy")",
+                                                lugar: "@p.Lugar ?? "Por definir""
+                                            };
+                        </text>
+                    }
+                }
+            }
+        }
+
+            // Actualizar información del partido seleccionado
+            partidoSelect.addEventListener('change', function() {
+                const partidoId = this.value;
+                if (partidoId && partidosData[partidoId]) {
+                    const partido = partidosData[partidoId];
+                    equipoLocalNombre.textContent = partido.local;
+                    equipoVisitanteNombre.textContent = partido.visitante;
+                    fechaLugar.textContent = `${partido.fecha} - ${partido.lugar}`;
+                    partidoInfo.classList.remove('d-none');
+                } else {
+                    partidoInfo.classList.add('d-none');
+                }
+                actualizarResultadoPreview();
+            });
+
+            // Actualizar vista previa del resultado
+            function actualizarResultadoPreview() {
+                const local = carrerasLocal.value || '0';
+                const visitante = carrerasVisitante.value || '0';
+
+                resultadoTexto.textContent = `${local} - ${visitante}`;
+
+                if (local && visitante) {
+                    if (local > visitante) {
+                        resultadoPreview.classList.remove('alert-info', 'alert-warning');
+                        resultadoPreview.classList.add('alert-success');
+                        resultadoTexto.innerHTML += ' <span class="badge bg-success">Gana Local</span>';
+                    } else if (visitante > local) {
+                        resultadoPreview.classList.remove('alert-info', 'alert-warning');
+                        resultadoPreview.classList.add('alert-danger');
+                        resultadoTexto.innerHTML += ' <span class="badge bg-danger">Gana Visitante</span>';
+                    } else {
+                        resultadoPreview.classList.remove('alert-info', 'alert-success', 'alert-danger');
+                        resultadoPreview.classList.add('alert-warning');
+                        resultadoTexto.innerHTML += ' <span class="badge bg-warning text-dark">Empate</span>';
+                    }
+                }
+            }
+
+            carrerasLocal.addEventListener('input', actualizarResultadoPreview);
+            carrerasVisitante.addEventListener('input', actualizarResultadoPreview);
+        });
+    </script>
+}
+
+<style>
+    .card {
+        border-radius: 10px;
+    }
+
+    .card-header {
+        border-radius: 10px 10px 0 0 !important;
+    }
+
+    .form-control, .form-select {
+        border-radius: 5px;
+    }
+
+    .btn-lg {
+        padding: 0.5rem 1.5rem;
+        font-size: 1.1rem;
+    }
+
+    .fa-clipboard-check {
+        color: #20c997; /* Color verde para el icono de checklist */
+    }
+
+    #partidoInfo {
+        transition: all 0.3s ease;
+    }
+
+    #resultadoPreview {
+        font-size: 1.2rem;
+        font-weight: 500;
+    }
+
+    .badge {
+        font-size: 0.9rem;
+        padding: 0.35em 0.65em;
+    }
+</style>

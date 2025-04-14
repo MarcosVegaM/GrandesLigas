@@ -1,0 +1,122 @@
+﻿@model GrandesLigas.Models.Resultado
+
+@{
+    ViewData["Title"] = "Eliminar Resultado";
+    var partido = ViewBag.Partido as GrandesLigas.Models.Partido;
+    var equipos = ViewBag.Equipos as List<GrandesLigas.Models.Equipo>;
+    var equipoLocal = equipos?.FirstOrDefault(e => e.EquipoId == partido?.EquipoLocalId);
+    var equipoVisitante = equipos?.FirstOrDefault(e => e.EquipoId == partido?.EquipoVisitanteId);
+}
+
+<h2 class="text-center my-4">Eliminar Resultado</h2>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg">
+                <div class="card-header text-center bg-danger text-white">
+                    <h4><i class="fas fa-exclamation-triangle me-2"></i>Confirmar Eliminación</h4>
+                </div>
+                <div class="card-body">
+                    <h5 class="text-center mb-4">¿Está seguro que desea eliminar este resultado?</h5>
+
+                    <!-- Información del Resultado -->
+                    <div class="mb-4 p-3 bg-light rounded">
+                        <div class="row mb-3">
+                            <div class="col-md-5 text-end">
+                                <span class="fw-bold">@(equipoLocal?.Nombre ?? "Equipo local")</span>
+                            </div>
+                            <div class="col-md-2 text-center">
+                                <span class="fw-bold">@Model.CarrerasLocal - @Model.CarrerasVisitante</span>
+                            </div>
+                            <div class="col-md-5 text-start">
+                                <span class="fw-bold">@(equipoVisitante?.Nombre ?? "Equipo visitante")</span>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <span class="badge @(Model.CarrerasLocal > Model.CarrerasVisitante ? "bg-success" :
+                                              Model.CarrerasVisitante > Model.CarrerasLocal ? "bg-danger" : "bg-warning text-dark")">
+                                @if (Model.CarrerasLocal > Model.CarrerasVisitante)
+                                {
+                                    <text>Gana Local</text>
+                                }
+                                else if (Model.CarrerasVisitante > Model.CarrerasLocal)
+                                {
+                                    <text>Gana Visitante</text>
+                                }
+                                else
+                                {
+                                    <text>Empate</text>
+                                }
+                            </span>
+                        </div>
+                        <div class="text-center mt-2">
+                            <small class="text-muted">
+                                Partido del @(partido?.Fecha.ToString("dd/MM/yyyy") ?? "fecha desconocida") en @(partido?.Lugar ?? "lugar por definir")
+                            </small>
+                        </div>
+                    </div>
+
+                    <!-- Advertencia importante -->
+                    <div class="alert alert-warning">
+                        <h5 class="alert-heading"><i class="fas fa-exclamation-circle me-2"></i>¡Atención!</h5>
+                        <p>
+                            Al eliminar este resultado, se revertirán automáticamente las estadísticas en la clasificación
+                            para ambos equipos involucrados.
+                        </p>
+                    </div>
+
+                    @using (Html.BeginForm("Eliminar", "Resultado", new { id = Model.ResultadoId }, FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-group text-center mt-4">
+                            <button type="submit" class="btn btn-danger btn-lg">
+                                <i class="fas fa-trash-alt me-2"></i>Confirmar Eliminación
+                            </button>
+                            <a href="@Url.Action("Index", "Resultado")" class="btn btn-outline-secondary btn-lg ms-3">
+                                <i class="fas fa-times me-2"></i>Cancelar
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        border-radius: 10px;
+    }
+
+    .card-header {
+        border-radius: 10px 10px 0 0 !important;
+    }
+
+    .btn-lg {
+        padding: 0.5rem 1.5rem;
+        font-size: 1.1rem;
+    }
+
+    .fa-exclamation-triangle {
+        color: #fff; /* Color blanco para el icono de advertencia */
+    }
+
+    .badge {
+        font-size: 0.9rem;
+        padding: 0.35em 0.65em;
+        font-weight: 500;
+    }
+
+    .bg-success {
+        background-color: #198754 !important;
+    }
+
+    .bg-danger {
+        background-color: #dc3545 !important;
+    }
+
+    .bg-warning {
+        background-color: #ffc107 !important;
+    }
+</style>

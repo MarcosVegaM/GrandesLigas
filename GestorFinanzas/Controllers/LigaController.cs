@@ -135,7 +135,12 @@ namespace GrandesLigas.Controllers
                 TempData["SuccessMessage"] = "Liga eliminada exitosamente.";
                 return RedirectToAction("Index");
             }
-            return NotFound();
+            else
+            {
+                TempData["ErrorMessage"] = "Error al eliminar liga";
+                return RedirectToAction("Index");
+            }
+        
         }
     }
 }

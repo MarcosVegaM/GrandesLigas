@@ -1,0 +1,335 @@
+﻿@using GrandesLigas.Models
+@model IEnumerable<Clasificacion>
+
+@{
+    ViewData["Title"] = "Clasificaciones por Liga";
+    var ligas = ViewBag.Ligas as List<Liga>;
+    var ligaSeleccionada = ViewBag.LigaSeleccionada as Liga;
+}
+
+<h2 class="text-center my-4">Tablas de Clasificación</h2>
+
+<!-- Botones de exportación -->
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="btn-group" role="group">
+            <button id="exportPdfBtn" class="btn btn-danger">
+                <i class="fas fa-file-pdf me-2"></i>Exportar a PDF
+            </button>
+            <button id="exportExcelBtn" class="btn btn-success">
+                <i class="fas fa-file-excel me-2"></i>Exportar a Excel
+            </button>
+        </div>
+    </div>
+    <div class="col-md-6 text-end">
+        @if (ligaSeleccionada != null)
+        {
+            <h4 class="d-inline-block">
+                <span class="badge bg-primary">
+                    <i class="fas fa-trophy me-2"></i>@ligaSeleccionada.Nombre
+                </span>
+            </h4>
+        }
+    </div>
+</div>
+
+@if (ligaSeleccionada != null)
+{
+    <div class="text-center mb-4">
+        <p class="text-muted">Temporada @DateTime.Now.Year</p>
+    </div>
+}
+
+@{
+    var clasificacionesPorLiga = Model
+        .GroupBy(c => c.LigaId)
+        .OrderBy(g => g.Key);
+}
+
+@foreach (var grupo in clasificacionesPorLiga)
+{
+    var liga = ligas.FirstOrDefault(l => l.Id == grupo.Key);
+
+    <div class="card shadow-lg mb-5" id="clasificacion-@grupo.Key">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h4 class="mb-0">
+                <i class="fas fa-trophy me-2"></i>@(liga?.Nombre ?? $"Liga {grupo.Key}")
+            </h4>
+            <div>
+                <button class="btn btn-sm btn-light export-pdf-table" data-table-id="clasificacion-@grupo.Key">
+                    <i class="fas fa-file-pdf"></i>
+                </button>
+                <button class="btn btn-sm btn-light export-excel-table" data-table-id="clasificacion-@grupo.Key">
+                    <i class="fas fa-file-excel"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0" id="table-@grupo.Key">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="text-center">Pos</th>
+                            <th>Equipo</th>
+                            <th class="text-center">JJ</th>
+                            <th class="text-center">JG</th>
+                            <th class="text-center">JP</th>
+                            <th class="text-center">CA</th>
+                            <th class="text-center">CR</th>
+                            <th class="text-center">Dif</th>
+                            <th class="text-center">%</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            var posicion = 1;
+                            var clasificacionesOrdenadas = grupo
+                            .OrderByDescending(c => c.Porcentaje)
+                            .ThenByDescending(c => c.CarrerasAnotadas - c.CarrerasRecibidas);
+                        }
+
+                        @foreach (var item in clasificacionesOrdenadas)
+                        {
+                            var equipo = ViewBag.Equipos as List<Equipo>;
+                            var nombreEquipo = equipo?.FirstOrDefault(e => e.EquipoId == item.EquipoId)?.Nombre ?? "Equipo desconocido";
+
+                            <tr>
+                                <td class="text-center fw-bold">@posicion</td>
+                                <td>@nombreEquipo</td>
+                                <td class="text-center">@item.JuegosJugados</td>
+                                <td class="text-center">@item.JuegosGanados</td>
+                                <td class="text-center">@item.JuegosPerdidos</td>
+                                <td class="text-center">@item.CarrerasAnotadas</td>
+                                <td class="text-center">@item.CarrerasRecibidas</td>
+                                <td class="text-center @((item.CarrerasAnotadas - item.CarrerasRecibidas) >= 0 ? "text-success" : "text-danger")">
+                                    @(item.CarrerasAnotadas - item.CarrerasRecibidas)
+                                </td>
+                                <td class="text-center fw-bold">@item.Porcentaje.ToString("0.000")</td>
+                            </tr>
+
+                            posicion++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer text-muted small">
+            <div class="row">
+                <div class="col-md-6">
+                    <i class="fas fa-info-circle me-2"></i>JJ: Juegos Jugados | JG: Juegos Ganados | JP: Juegos Perdidos
+                </div>
+                <div class="col-md-6 text-end">
+                    <i class="fas fa-info-circle me-2"></i>CA: Carreras Anotadas | CR: Carreras Recibidas | Dif: Diferencia
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info text-center">
+        <h4 class="alert-heading"><i class="fas fa-info-circle me-2"></i>No hay clasificaciones disponibles</h4>
+        <p>No se han encontrado datos de clasificación para mostrar.</p>
+    </div>
+}
+
+@section Scripts {
+    <!-- Librerías para exportación -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdn.sheetjs.com/xlsx-0.19.3/package/dist/xlsx.full.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Configuración para jsPDF
+            const { jsPDF } = window.jspdf;
+
+            // Exportar toda la página a PDF
+            document.getElementById('exportPdfBtn').addEventListener('click', function() {
+                const doc = new jsPDF();
+                const title = "@(ligaSeleccionada?.Nombre ?? "Clasificaciones") - Temporada @DateTime.Now.Year";
+
+                doc.text(title, 14, 15);
+
+                // Agregar cada tabla
+                document.querySelectorAll('.card').forEach((card, index) => {
+                    if (index > 0) doc.addPage();
+
+                    const table = card.querySelector('table');
+                    const headers = [];
+                    const data = [];
+
+                    // Obtener encabezados
+                    table.querySelectorAll('thead th').forEach(th => {
+                        headers.push(th.textContent.trim());
+                    });
+
+                    // Obtener datos
+                    table.querySelectorAll('tbody tr').forEach(tr => {
+                        const row = [];
+                        tr.querySelectorAll('td').forEach(td => {
+                            // Eliminar elementos HTML como los badges
+                            const content = td.textContent.trim();
+                            row.push(content);
+                        });
+                        data.push(row);
+                    });
+
+                    // Agregar tabla al PDF
+                    doc.autoTable({
+                        head: [headers],
+                        body: data,
+                        startY: index === 0 ? 25 : 20,
+                        theme: 'grid',
+                        headStyles: { fillColor: [13, 110, 253] }
+                    });
+                });
+
+                doc.save('Clasificaciones_@DateTime.Now.ToString("yyyyMMdd")');
+            });
+
+            // Exportar a Excel (botón principal)
+            document.getElementById('exportExcelBtn').addEventListener('click', function() {
+                const wb = XLSX.utils.book_new();
+
+                document.querySelectorAll('.card').forEach(card => {
+                    const table = card.querySelector('table');
+                    const ws = XLSX.utils.table_to_sheet(table);
+                    const ligaNombre = card.querySelector('.card-header h4').textContent.trim();
+
+                    XLSX.utils.book_append_sheet(wb, ws, ligaNombre.substring(0, 31));
+                });
+
+                // Usar JavaScript para la fecha
+                const fecha = new Date();
+                const fechaStr = `${fecha.getFullYear()}${(fecha.getMonth()+1).toString().padStart(2, '0')}${fecha.getDate().toString().padStart(2, '0')}`;
+                XLSX.writeFile(wb, `Clasificaciones_${fechaStr}.xlsx`);
+            });
+
+            // Exportar tabla individual a Excel
+            document.querySelectorAll('.export-excel-table').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const tableId = this.getAttribute('data-table-id');
+                    const card = document.getElementById(tableId);
+                    const table = card.querySelector('table');
+                    const ligaNombre = card.querySelector('.card-header h4').textContent.trim();
+
+                    const wb = XLSX.utils.book_new();
+                    const ws = XLSX.utils.table_to_sheet(table);
+                    XLSX.utils.book_append_sheet(wb, ws, ligaNombre.substring(0, 31));
+
+                    // Usar JavaScript para la fecha
+                    const fecha = new Date();
+                    const fechaStr = `${fecha.getFullYear()}${(fecha.getMonth()+1).toString().padStart(2, '0')}${fecha.getDate().toString().padStart(2, '0')}`;
+                    XLSX.writeFile(wb, `${ligaNombre.replace(/[^a-z0-9]/gi, '_')}_${fechaStr}.xlsx`);
+                });
+            });
+            // Exportar tabla individual
+            document.querySelectorAll('.export-pdf-table').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const tableId = this.getAttribute('data-table-id');
+                    const card = document.getElementById(tableId);
+                    const ligaNombre = card.querySelector('.card-header h4').textContent.trim();
+
+                    const doc = new jsPDF();
+                    doc.text(ligaNombre + " - Temporada @DateTime.Now.Year", 14, 15);
+
+                    const table = card.querySelector('table');
+                    const headers = [];
+                    const data = [];
+
+                    table.querySelectorAll('thead th').forEach(th => {
+                        headers.push(th.textContent.trim());
+                    });
+
+                    table.querySelectorAll('tbody tr').forEach(tr => {
+                        const row = [];
+                        tr.querySelectorAll('td').forEach(td => {
+                            row.push(td.textContent.trim());
+                        });
+                        data.push(row);
+                    });
+
+                    doc.autoTable({
+                        head: [headers],
+                        body: data,
+                        startY: 25,
+                        theme: 'grid',
+                        headStyles: { fillColor: [13, 110, 253] }
+                    });
+
+                    doc.save(ligaNombre.replace(/[^a-z0-9]/gi, '_') + '_@DateTime.Now.ToString("yyyyMMdd")');
+                });
+            });
+
+            document.querySelectorAll('.export-excel-table').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const tableId = this.getAttribute('data-table-id');
+                    const card = document.getElementById(tableId);
+                    const table = card.querySelector('table');
+                    const ligaNombre = card.querySelector('.card-header h4').textContent.trim();
+
+                    const wb = XLSX.utils.book_new();
+                    const ws = XLSX.utils.table_to_sheet(table);
+                    XLSX.utils.book_append_sheet(wb, ws, ligaNombre.substring(0, 31));
+
+                    XLSX.writeFile(wb, ligaNombre.replace(/[^a-z0-9]/gi, '_') + '_@DateTime.Now.ToString("yyyyMMdd")');
+                });
+            });
+        });
+    </script>
+}
+
+<style>
+    .card {
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .card-header {
+        font-weight: 600;
+    }
+
+    .table {
+        margin-bottom: 0;
+    }
+
+        .table th {
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+            background-color: #f8f9fa;
+        }
+
+        .table td, .table th {
+            vertical-align: middle;
+            padding: 0.75rem 1rem;
+        }
+
+    .table-hover tbody tr:hover {
+        background-color: rgba(13, 110, 253, 0.05);
+    }
+
+    .text-success {
+        color: #198754 !important;
+    }
+
+    .text-danger {
+        color: #dc3545 !important;
+    }
+
+    .fa-trophy {
+        color: #ffc107;
+    }
+
+    /* Estilos para botones de exportación */
+    .export-pdf-table, .export-excel-table {
+        padding: 0.25rem 0.5rem;
+        margin-left: 0.5rem;
+    }
+
+    #exportPdfBtn, #exportExcelBtn {
+        padding: 0.5rem 1rem;
+    }
+</style>

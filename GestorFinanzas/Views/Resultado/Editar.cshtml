@@ -1,0 +1,185 @@
+﻿@model GrandesLigas.Models.Resultado
+
+@{
+    ViewData["Title"] = "Editar Resultado";
+    var partido = ViewBag.PartidoSeleccionado as GrandesLigas.Models.Partido;
+    var equipos = ViewBag.Equipos as List<GrandesLigas.Models.Equipo>;
+    var equipoLocal = equipos?.FirstOrDefault(e => e.EquipoId == partido?.EquipoLocalId);
+    var equipoVisitante = equipos?.FirstOrDefault(e => e.EquipoId == partido?.EquipoVisitanteId);
+}
+
+<h2 class="text-center my-4">Editar Resultado</h2>
+
+@using (Html.BeginForm("Editar", "Resultado", new { ResultadoId = Model.ResultadoId }, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-lg">
+                    <div class="card-header text-center bg-primary text-white">
+                        <h4><i class="fas fa-edit me-2"></i>Actualizar Resultado</h4>
+                    </div>
+                    <div class="card-body">
+                        <!-- Información del Partido -->
+                        <div class="mb-4 p-3 bg-light rounded">
+                            <div class="row">
+                                <div class="col-md-5 text-end">
+                                    <span class="fw-bold">@(equipoLocal?.Nombre ?? "Equipo local")</span>
+                                </div>
+                                <div class="col-md-2 text-center">
+                                    <span>vs</span>
+                                </div>
+                                <div class="col-md-5 text-start">
+                                    <span class="fw-bold">@(equipoVisitante?.Nombre ?? "Equipo visitante")</span>
+                                </div>
+                            </div>
+                            <div class="text-center mt-2">
+                                <small class="text-muted">
+                                    @(partido?.Fecha.ToString("dd/MM/yyyy") ?? "Fecha desconocida") -
+                                    @(partido?.Lugar ?? "Lugar por definir")
+                                </small>
+                            </div>
+                        </div>
+
+                        <!-- Carreras Local -->
+                        <div class="form-group mb-3">
+                            <label class="form-label fw-bold">Carreras (@(equipoLocal?.Nombre ?? "Local"))</label>
+                            @Html.TextBoxFor(model => model.CarrerasLocal,
+                                     new
+                                     {
+                                         @class = "form-control",
+                                         type = "number",
+                                         min = "0",
+                                         required = "required",
+                                         id = "carrerasLocal"
+                                     })
+                            @Html.ValidationMessageFor(model => model.CarrerasLocal, "", new { @class = "text-danger" })
+                        </div>
+
+                        <!-- Carreras Visitante -->
+                        <div class="form-group mb-3">
+                            <label class="form-label fw-bold">Carreras (@(equipoVisitante?.Nombre ?? "Visitante"))</label>
+                            @Html.TextBoxFor(model => model.CarrerasVisitante,
+                                     new
+                                     {
+                                         @class = "form-control",
+                                         type = "number",
+                                         min = "0",
+                                         required = "required",
+                                         id = "carrerasVisitante"
+                                     })
+                            @Html.ValidationMessageFor(model => model.CarrerasVisitante, "", new { @class = "text-danger" })
+                        </div>
+
+                        <!-- Resultado Preview -->
+                        <div class="alert alert-info text-center" id="resultadoPreview">
+                            <span id="resultadoTexto">@Model.CarrerasLocal - @Model.CarrerasVisitante</span>
+                            @if (Model.CarrerasLocal > Model.CarrerasVisitante)
+                            {
+                                <span class="badge bg-success ms-2">Gana Local</span>
+                            }
+                            else if (Model.CarrerasVisitante > Model.CarrerasLocal)
+                            {
+                                <span class="badge bg-danger ms-2">Gana Visitante</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-warning text-dark ms-2">Empate</span>
+                            }
+                        </div>
+
+                        <div class="form-group text-center mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-save me-2"></i>Guardar Cambios
+                            </button>
+                            <a href="@Url.Action("Index", "Resultado")" class="btn btn-outline-secondary btn-lg ms-3">
+                                <i class="fas fa-times me-2"></i>Cancelar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const carrerasLocal = document.getElementById('carrerasLocal');
+            const carrerasVisitante = document.getElementById('carrerasVisitante');
+            const resultadoPreview = document.getElementById('resultadoPreview');
+            const resultadoTexto = document.getElementById('resultadoTexto');
+
+            // Actualizar vista previa del resultado
+            function actualizarResultadoPreview() {
+                const local = carrerasLocal.value || '0';
+                const visitante = carrerasVisitante.value || '0';
+
+                resultadoTexto.textContent = `${local} - ${visitante}`;
+
+                // Limpiar badges anteriores
+                const badges = resultadoTexto.querySelectorAll('.badge');
+                badges.forEach(badge => badge.remove());
+
+                if (local && visitante) {
+                    if (local > visitante) {
+                        resultadoPreview.classList.remove('alert-info', 'alert-warning', 'alert-danger');
+                        resultadoPreview.classList.add('alert-success');
+                        resultadoTexto.innerHTML += ' <span class="badge bg-success ms-2">Gana Local</span>';
+                    } else if (visitante > local) {
+                        resultadoPreview.classList.remove('alert-info', 'alert-warning', 'alert-success');
+                        resultadoPreview.classList.add('alert-danger');
+                        resultadoTexto.innerHTML += ' <span class="badge bg-danger ms-2">Gana Visitante</span>';
+                    } else {
+                        resultadoPreview.classList.remove('alert-info', 'alert-success', 'alert-danger');
+                        resultadoPreview.classList.add('alert-warning');
+                        resultadoTexto.innerHTML += ' <span class="badge bg-warning text-dark ms-2">Empate</span>';
+                    }
+                }
+            }
+
+            carrerasLocal.addEventListener('input', actualizarResultadoPreview);
+            carrerasVisitante.addEventListener('input', actualizarResultadoPreview);
+        });
+    </script>
+}
+
+<style>
+    .card {
+        border-radius: 10px;
+    }
+
+    .card-header {
+        border-radius: 10px 10px 0 0 !important;
+    }
+
+    .form-control {
+        border-radius: 5px;
+    }
+
+    .btn-lg {
+        padding: 0.5rem 1.5rem;
+        font-size: 1.1rem;
+    }
+
+    .fa-edit {
+        color: #ffc107; /* Color amarillo para el icono de editar */
+    }
+
+    #resultadoPreview {
+        font-size: 1.2rem;
+        font-weight: 500;
+    }
+
+    .badge {
+        font-size: 0.9rem;
+        padding: 0.35em 0.65em;
+    }
+</style>
