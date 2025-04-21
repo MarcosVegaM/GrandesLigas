@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GrandesLigasAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ef672156a6e24d58216f55a34b45c07faf98cae0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d804dae6f6df3f598303bbc344640a4ea60a9b62")]
 [assembly: System.Reflection.AssemblyProductAttribute("GrandesLigasAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GrandesLigasAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

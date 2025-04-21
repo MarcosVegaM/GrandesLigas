@@ -145,6 +145,12 @@
             // Configuración para jsPDF
             const { jsPDF } = window.jspdf;
 
+            // Función para obtener fecha formateada
+            function getFormattedDate() {
+                const fecha = new Date();
+                return `${fecha.getFullYear()}${(fecha.getMonth()+1).toString().padStart(2, '0')}${fecha.getDate().toString().padStart(2, '0')}`;
+            }
+
             // Exportar toda la página a PDF
             document.getElementById('exportPdfBtn').addEventListener('click', function() {
                 const doc = new jsPDF();
@@ -186,95 +192,93 @@
                     });
                 });
 
-                doc.save('Clasificaciones_@DateTime.Now.ToString("yyyyMMdd")');
+                doc.save('Clasificaciones_' + getFormattedDate() + '.pdf');
             });
 
-            // Exportar a Excel (botón principal)
+            // Exportar a Excel (todas las tablas)
             document.getElementById('exportExcelBtn').addEventListener('click', function() {
-                const wb = XLSX.utils.book_new();
-
-                document.querySelectorAll('.card').forEach(card => {
-                    const table = card.querySelector('table');
-                    const ws = XLSX.utils.table_to_sheet(table);
-                    const ligaNombre = card.querySelector('.card-header h4').textContent.trim();
-
-                    XLSX.utils.book_append_sheet(wb, ws, ligaNombre.substring(0, 31));
-                });
-
-                // Usar JavaScript para la fecha
-                const fecha = new Date();
-                const fechaStr = `${fecha.getFullYear()}${(fecha.getMonth()+1).toString().padStart(2, '0')}${fecha.getDate().toString().padStart(2, '0')}`;
-                XLSX.writeFile(wb, `Clasificaciones_${fechaStr}.xlsx`);
-            });
-
-            // Exportar tabla individual a Excel
-            document.querySelectorAll('.export-excel-table').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const tableId = this.getAttribute('data-table-id');
-                    const card = document.getElementById(tableId);
-                    const table = card.querySelector('table');
-                    const ligaNombre = card.querySelector('.card-header h4').textContent.trim();
-
+                try {
                     const wb = XLSX.utils.book_new();
-                    const ws = XLSX.utils.table_to_sheet(table);
-                    XLSX.utils.book_append_sheet(wb, ws, ligaNombre.substring(0, 31));
+                    const fechaStr = getFormattedDate();
 
-                    // Usar JavaScript para la fecha
-                    const fecha = new Date();
-                    const fechaStr = `${fecha.getFullYear()}${(fecha.getMonth()+1).toString().padStart(2, '0')}${fecha.getDate().toString().padStart(2, '0')}`;
-                    XLSX.writeFile(wb, `${ligaNombre.replace(/[^a-z0-9]/gi, '_')}_${fechaStr}.xlsx`);
-                });
+                    document.querySelectorAll('.card').forEach(card => {
+                        const table = card.querySelector('table');
+                        if (table) {
+                            const ws = XLSX.utils.table_to_sheet(table);
+                            const ligaNombre = card.querySelector('.card-header h4')?.textContent?.trim() || 'Liga';
+                            XLSX.utils.book_append_sheet(wb, ws, ligaNombre.substring(0, 31));
+                        }
+                    });
+
+                    XLSX.writeFile(wb, `Clasificaciones_${fechaStr}.xlsx`);
+                } catch (error) {
+                    console.error('Error al exportar a Excel:', error);
+                    alert('Ocurrió un error al exportar a Excel');
+                }
             });
-            // Exportar tabla individual
+
+            // Exportar tabla individual a PDF
             document.querySelectorAll('.export-pdf-table').forEach(btn => {
                 btn.addEventListener('click', function() {
-                    const tableId = this.getAttribute('data-table-id');
-                    const card = document.getElementById(tableId);
-                    const ligaNombre = card.querySelector('.card-header h4').textContent.trim();
+                    try {
+                        const tableId = this.getAttribute('data-table-id');
+                        const card = document.getElementById(tableId);
+                        const ligaNombre = card.querySelector('.card-header h4').textContent.trim();
 
-                    const doc = new jsPDF();
-                    doc.text(ligaNombre + " - Temporada @DateTime.Now.Year", 14, 15);
+                        const doc = new jsPDF();
+                        doc.text(ligaNombre + " - Temporada " + new Date().getFullYear(), 14, 15);
 
-                    const table = card.querySelector('table');
-                    const headers = [];
-                    const data = [];
+                        const table = card.querySelector('table');
+                        const headers = [];
+                        const data = [];
 
-                    table.querySelectorAll('thead th').forEach(th => {
-                        headers.push(th.textContent.trim());
-                    });
-
-                    table.querySelectorAll('tbody tr').forEach(tr => {
-                        const row = [];
-                        tr.querySelectorAll('td').forEach(td => {
-                            row.push(td.textContent.trim());
+                        table.querySelectorAll('thead th').forEach(th => {
+                            headers.push(th.textContent.trim());
                         });
-                        data.push(row);
-                    });
 
-                    doc.autoTable({
-                        head: [headers],
-                        body: data,
-                        startY: 25,
-                        theme: 'grid',
-                        headStyles: { fillColor: [13, 110, 253] }
-                    });
+                        table.querySelectorAll('tbody tr').forEach(tr => {
+                            const row = [];
+                            tr.querySelectorAll('td').forEach(td => {
+                                row.push(td.textContent.trim());
+                            });
+                            data.push(row);
+                        });
 
-                    doc.save(ligaNombre.replace(/[^a-z0-9]/gi, '_') + '_@DateTime.Now.ToString("yyyyMMdd")');
+                        doc.autoTable({
+                            head: [headers],
+                            body: data,
+                            startY: 25,
+                            theme: 'grid',
+                            headStyles: { fillColor: [13, 110, 253] }
+                        });
+
+                        doc.save(ligaNombre.replace(/[^a-z0-9]/gi, '_') + '_' + getFormattedDate() + '.pdf');
+                    } catch (error) {
+                        console.error('Error al exportar PDF:', error);
+                        alert('Error al generar PDF');
+                    }
                 });
             });
 
+            // Exportar tabla individual a Excel - Versión corregida
             document.querySelectorAll('.export-excel-table').forEach(btn => {
                 btn.addEventListener('click', function() {
-                    const tableId = this.getAttribute('data-table-id');
-                    const card = document.getElementById(tableId);
-                    const table = card.querySelector('table');
-                    const ligaNombre = card.querySelector('.card-header h4').textContent.trim();
+                    try {
+                        const tableId = this.getAttribute('data-table-id');
+                        const card = document.getElementById(tableId);
+                        const table = card.querySelector('table');
+                        const ligaNombre = card.querySelector('.card-header h4').textContent.trim();
 
-                    const wb = XLSX.utils.book_new();
-                    const ws = XLSX.utils.table_to_sheet(table);
-                    XLSX.utils.book_append_sheet(wb, ws, ligaNombre.substring(0, 31));
+                        const wb = XLSX.utils.book_new();
+                        const ws = XLSX.utils.table_to_sheet(table);
+                        XLSX.utils.book_append_sheet(wb, ws, ligaNombre.substring(0, 31));
 
-                    XLSX.writeFile(wb, ligaNombre.replace(/[^a-z0-9]/gi, '_') + '_@DateTime.Now.ToString("yyyyMMdd")');
+                        const fileName = `${ligaNombre.replace(/[^a-z0-9áéíóúüñÁÉÍÓÚÜÑ]/gi, '_')}_${getFormattedDate()}.xlsx`;
+                        XLSX.writeFile(wb, fileName);
+                    } catch (error) {
+                        console.error('Error al exportar Excel:', error);
+                        alert('Error al generar Excel');
+                    }
                 });
             });
         });
